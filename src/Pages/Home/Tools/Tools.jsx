@@ -4,7 +4,7 @@ import CardTool from "./CardTool";
 
 const Tools = () => {
   return (
-    <section id="tools">
+    <section id="tools" className="px-8 sm:px-0">
       <div className="container mx-auto">
         <TItle
           title="Best Seller Tools"
