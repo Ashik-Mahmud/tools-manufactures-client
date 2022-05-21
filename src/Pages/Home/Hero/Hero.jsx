@@ -3,7 +3,7 @@ import React from "react";
 const Hero = () => {
   return (
     <div>
-      <button className="btn w-64 rounded-full">Button</button>
+      <h2>Hero section</h2>
     </div>
   );
 };
