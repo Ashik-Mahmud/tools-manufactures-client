@@ -1,47 +1,54 @@
 import React from "react";
-import Slider from "react-slick";
-
 const Hero = () => {
   const settings = {
-    dots: true,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
     <section
       className="bg-base-200 body-font py-40"
-      style={{ clipPath: `ellipse(300% 100% at 237.5% 0%)` }}
+      style={{ clipPath: `ellipse(300% 100% at 210.5% 0%)` }}
     >
-      <div className="hero  pb-40 bg-base-200">
+      <div className="hero pb-80 md:pb-40 bg-base-200">
         <div className="hero-content flex-col justify-between lg:flex-row-reverse">
-          <div className="md:w-2/5 rounded shadow-2xl overflow-hidden cursor-grab">
-            <Slider {...settings}>
-              <div className="outline-none">
-                <img
-                  src="https://media.istockphoto.com/photos/many-tools-picture-id492201907?k=20&m=492201907&s=612x612&w=0&h=IQ1-Uwst23ASNY1fxjIuJ28P42NTKKLRj9BP7yD0D4w="
-                  alt=""
-                  className="max-w-lg rounded-lg "
-                />
-              </div>
-              <div className="outline-none">
-                <img
-                  src="https://media.istockphoto.com/photos/many-tools-picture-id492201907?k=20&m=492201907&s=612x612&w=0&h=IQ1-Uwst23ASNY1fxjIuJ28P42NTKKLRj9BP7yD0D4w="
-                  className="max-w-lg rounded-lg "
-                  alt=""
-                />
-              </div>
-              <div className="outline-none">
-                <img
-                  src="https://media.istockphoto.com/photos/many-tools-picture-id492201907?k=20&m=492201907&s=612x612&w=0&h=IQ1-Uwst23ASNY1fxjIuJ28P42NTKKLRj9BP7yD0D4w="
-                  className="max-w-lg rounded-lg "
-                  alt=""
-                />
-              </div>
-            </Slider>
+          <div className="w-full lg:w-2/5  rounded shadow-2xl overflow-hidden cursor-grab">
+            <div className="outline-none h-full">
+              <img
+                src="https://thearchitectsdiary.com/wp-content/uploads/2019/05/toolset-1000x550.jpg"
+                className="md:rounded-lg h-full w-full"
+                alt=""
+              />
+            </div>
           </div>
 
           <div className="lg:w-2/4">
