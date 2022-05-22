@@ -6,9 +6,9 @@ const useToken = (user) => {
     if (user) {
       (async () => {
         await fetch(`http://localhost:5000/login`, {
-          method: "POST",
+          method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ uid: user?.uid }),
+          body: JSON.stringify({ uid: user?.uid, email: user?.email }),
         })
           .then((res) => res.json())
           .then(({ token }) => {
