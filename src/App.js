@@ -23,7 +23,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/purchase/:purchaseId" element={<Purchase />} />
 
-          {/* Not found Routes */}}
+          {/* Not found Routes */}
           <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
