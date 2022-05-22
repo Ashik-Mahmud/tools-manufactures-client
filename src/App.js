@@ -8,6 +8,7 @@ import Portfolios from "./Pages/Portfolios/Portfolios";
 import Purchase from "./Pages/Purchase/Purchase";
 import Footer from "./Shared/Footer/Footer";
 import Navbar from "./Shared/Navbar/Navbar";
+import NotFound from "./Shared/NotFound/NotFound";
 function App() {
   return (
     <>
@@ -21,6 +22,9 @@ function App() {
           <Route path="/portfolios" element={<Portfolios />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/purchase/:purchaseId" element={<Purchase />} />
+
+          {/* Not found Routes */}}
+          <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
       
