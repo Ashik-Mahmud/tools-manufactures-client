@@ -221,11 +221,29 @@ const Portfolios = () => {
                       </ul>
                     </div>
                     <div className="project shadow rounded p-3">
-                      <h3 className="text-lg">Blog Application</h3>
+                      <h3 className="text-lg">Volunteers App</h3>
                       <div className="flex justify-around items-center my-2 text-sm text-primary">
-                        <a href="/">Live</a>
-                        <a href="/">Client</a>
-                        <a href="/">Server</a>
+                        <a
+                          href="https://volunteers-app-5f121.web.app/"
+                          target={"_blank"}
+                          rel="noreferrer"
+                        >
+                          Live
+                        </a>
+                        <a
+                          href="https://github.com/Ashik-Mahmud/volunteer-app-with-nodejs"
+                          target={"_blank"}
+                          rel="noreferrer"
+                        >
+                          Client
+                        </a>
+                        <a
+                          href="https://github.com/Ashik-Mahmud/volunteeer-app-server"
+                          target={"_blank"}
+                          rel="noreferrer"
+                        >
+                          Server
+                        </a>
                       </div>
                       <ul className="text-sm flex flex-wrap gap-1">
                         <li className="bg-base-200 p-1 rounded text-xs">
@@ -247,11 +265,26 @@ const Portfolios = () => {
                       </ul>
                     </div>
                     <div className="project shadow rounded p-3">
-                      <h3 className="text-lg">Blog Application</h3>
+                      <h3 className="text-lg">Guiter Buying App</h3>
                       <div className="flex justify-around items-center my-2 text-sm text-primary">
-                        <a href="/">Live</a>
-                        <a href="/">Client</a>
-                        <a href="/">Server</a>
+                        <a href="/" target={"_blank"}>
+                          Live
+                        </a>
+                        <a
+                          href="https://github.com/Ashik-Mahmud/react-guiter-shop-app"
+                          target={"_blank"}
+                          rel="noreferrer"
+                        >
+                          Client
+                        </a>
+                        <a
+                          href="/"
+                          title="Used Firebase Server"
+                          className="disabled pointer-events-none text-slate-400"
+                          target={"_blank"}
+                        >
+                          Firebase
+                        </a>
                       </div>
                       <ul className="text-sm flex flex-wrap gap-1">
                         <li className="bg-base-200 p-1 rounded text-xs">
