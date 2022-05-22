@@ -3,13 +3,13 @@ import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 const Login = () => {
   return (
-    <section className="login grid place-items-center min-h-[90vh]">
-      <div className="login-card flex gap-1 lg:w-1/2 shadow-sm rounded p-10">
+    <section className="login grid place-items-center min-h-[90vh] mb-10">
+      <div className="login-card flex-col md:flex-row flex gap-1 lg:w-1/2 shadow-sm rounded p-4 md:p-10">
         <div className="md:w-2/4 grid place-items-center">
           <img
             src="https://theuniqueacademy.co.in/assets/images/test.png"
             alt="login"
-            className="max-w-lg"
+            className="md:max-w-lg"
           />
         </div>
         <div className="md:w-3/5 backdrop-blur-sm px-5">
@@ -44,7 +44,7 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="flex justify-between items-center my-3">
+            <div className="flex justify-between items-center my-3 flex-wrap gap-4">
               <button className="btn btn-primary px-20 rounded-full">
                 Login
               </button>

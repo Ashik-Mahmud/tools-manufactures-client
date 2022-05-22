@@ -3,14 +3,14 @@ import TItle from "../../../Components/TItle/TItle";
 
 const OrderStep = () => {
   return (
-    <section className="orderStep py-20 mb-20">
+    <section className="orderStep py-20 mb-20 px-6 md:px-0">
       <div className="container mx-auto">
         <TItle
           title="Order Step"
           subTitle=" Here is the order step you have to do for get order."
         />
 
-        <ol className="items-center sm:flex">
+        <ol className="items-center sm:flex justify-center">
           <li className="relative mb-6 sm:mb-0">
             <div className="flex items-center">
               <div className="flex z-10 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
@@ -29,10 +29,8 @@ const OrderStep = () => {
               </div>
               <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
             </div>
-            <div className="mt-3 sm:pr-8">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                STEP 1
-              </h3>
+            <div className="mt-3 sm:pr-8 ">
+              <h3 className="text-lg font-semibold text-gray-900">STEP 1</h3>
               <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                 Create your account
               </time>
@@ -60,9 +58,7 @@ const OrderStep = () => {
               <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
             </div>
             <div className="mt-3 sm:pr-8">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                STEP 2
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900 ">STEP 2</h3>
               <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                 Order the Product
               </time>
@@ -90,9 +86,7 @@ const OrderStep = () => {
               <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
             </div>
             <div className="mt-3 sm:pr-8">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                STEP 3
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900 ">STEP 3</h3>
               <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                 Go to Dashboard and Get Order
               </time>
@@ -121,9 +115,7 @@ const OrderStep = () => {
               <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
             </div>
             <div className="mt-3 sm:pr-8">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                STEP 4
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900 ">STEP 4</h3>
               <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                 You will see the Manage Order Menu
               </time>
@@ -152,9 +144,7 @@ const OrderStep = () => {
               <div className="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
             </div>
             <div className="mt-3 sm:pr-8">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                STEP 5
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900 ">STEP 5</h3>
               <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                 Congratulation!! I got it.
               </time>

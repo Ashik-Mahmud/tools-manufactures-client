@@ -2,7 +2,7 @@ import React from "react";
 
 const Purchase = () => {
   return (
-    <section className="p-10">
+    <section className="p-4 md:p-10">
       <div className="container mx-auto">
         <h3 className="text-3xl">Purchase</h3>
         <div className="purchase-content shadow my-5 p-6 grid grid-cols-1 md:grid-cols-2 gap-6">

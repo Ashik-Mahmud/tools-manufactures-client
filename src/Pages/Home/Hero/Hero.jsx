@@ -21,7 +21,7 @@ const Hero = () => {
             <span className="text-lg">
               We are <strong>Tools House</strong>.
             </span>
-            <h1 className="text-5xl font-bold leading-tight">
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight">
               We are the best Tools Manufacturer Company in the world.
             </h1>
             <p className="py-6">

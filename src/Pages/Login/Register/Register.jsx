@@ -7,12 +7,12 @@ const Register = () => {
     <div>
       {" "}
       <section className="login grid place-items-center min-h-[90vh]">
-        <div className="sign-up-card flex gap-1 lg:w-1/2 shadow-sm rounded p-10">
+        <div className="sign-up-card flex flex-col md:flex-row my-6 gap-1 lg:w-1/2 shadow-sm rounded p-4 md:p-10">
           <div className="md:w-2/4 grid place-items-center">
             <img
               src="https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7865.jpg?w=2000"
               alt="login"
-              className="max-w-lg"
+              className="md:max-w-lg"
             />
           </div>
           <div className="md:w-3/5 backdrop-blur-sm px-5">

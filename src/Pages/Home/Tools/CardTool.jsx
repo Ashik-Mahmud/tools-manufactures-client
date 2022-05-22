@@ -24,10 +24,10 @@ const CardTool = () => {
           <div className="badge badge-outline">Available- 1000pcs</div>
           <div className="badge badge-outline">115$</div>
         </div>
-        <div class="card-actions justify-end mt-2">
+        <div className="card-actions justify-end mt-2">
           <button
             onClick={() => navigate(`/purchase/1`)}
-            class="btn btn-primary"
+            className="btn btn-primary"
           >
             Order Now
           </button>

@@ -3,20 +3,18 @@ import React from "react";
 const Statistic = () => {
   return (
     <section>
-      <div className="container mx-auto flex justify-center pb-10">
-        <div className="stats shadow">
+      <div className="container mx-auto  flex flex-col md:flex-row justify-center pb-10">
+        <div className="grid md:stats grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 shadow">
           <div className="stat place-items-center">
             <div className="stat-title">Downloads</div>
             <div className="stat-value">31K</div>
             <div className="stat-desc">From January 1st to February 1st</div>
           </div>
-
           <div className="stat place-items-center">
             <div className="stat-title">Users</div>
             <div className="stat-value text-secondary">4,200</div>
             <div className="stat-desc text-secondary">↗︎ 40 (2%)</div>
           </div>
-
           <div className="stat place-items-center">
             <div className="stat-title">New Registers</div>
             <div className="stat-value">1,200</div>
