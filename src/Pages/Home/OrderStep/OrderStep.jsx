@@ -1,17 +1,16 @@
 import React from "react";
+import TItle from "../../../Components/TItle/TItle";
 
 const OrderStep = () => {
   return (
-    <section className="orderStep">
+    <section className="orderStep py-20">
       <div className="container mx-auto">
-        <div className="title text-center my-5">
-          <h3 className="text-4xl">Order Step</h3>
-          <span className="text-md">
-            Here is the order step you have to do for get order.
-          </span>
-        </div>
+        <TItle
+          title="Order Step"
+          subTitle=" Here is the order step you have to do for get order."
+        />
         <section className="text-gray-600 body-font">
-          <div className="container px-5 py-24 mx-auto flex flex-wrap">
+          <div className="container px-5 py-10 mx-auto flex flex-wrap">
             <div className="flex flex-wrap w-full">
               <div className="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
                 <div className="flex relative pb-12">

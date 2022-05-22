@@ -4,7 +4,7 @@ import CardTeam from "./CardTeam";
 
 const Teams = () => {
   return (
-    <section className="teams py-10 px-8 sm:px-0">
+    <section className="teams py-20 px-8 sm:px-0">
       <div className="container mx-auto">
         <TItle
           title="Our Expert Technician"

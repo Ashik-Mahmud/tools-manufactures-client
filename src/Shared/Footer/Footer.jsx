@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer
       className="bg-base-200"
-      style={{ clipPath: `ellipse(63% 100% at 45.45% 100%)` }}
+      style={{ clipPath: `ellipse(130% 100% at 51.45% 100%)` }}
     >
       <div className="footer pt-36 pb-20 bg-base-200 text-base-content container mx-auto">
         <div>
