@@ -3,7 +3,7 @@ import { AiTwotoneStar } from "react-icons/ai";
 const CardReview = () => {
   return (
     <div className="p-4  w-full">
-      <div className="h-full bg-gray-100 p-8 rounded">
+      <div className="h-full bg-base-200 p-8 rounded">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"

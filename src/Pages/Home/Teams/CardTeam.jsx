@@ -7,8 +7,10 @@ const CardTeam = ({ img }) => {
         <img src={img} alt="Shoes" />
       </figure>
       <div className="card-body items-center text-center">
-        <h2 className="card-title">Jowery Portin!</h2>
-        <p>Senior Technician</p>
+        <h2 className="card-title mb-0 pb-0">Jowery Portin!</h2>
+        <p className="mb-0 text-sm uppercase text-gray-400">
+          Senior Technician
+        </p>
         <div className="card-actions">
           <div className="flex items-center gap-2">
             <button className="btn btn-square btn-sm">
