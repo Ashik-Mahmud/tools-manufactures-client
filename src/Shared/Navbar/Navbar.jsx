@@ -1,7 +1,7 @@
 import React from "react";
 import { BiLogInCircle } from "react-icons/bi";
 import { BsTools } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 const Navbar = () => {
   /*  Menus */
   const NavbarMenus = (
@@ -27,6 +27,11 @@ const Navbar = () => {
         <NavLink className="uppercase" to="/contact">
           Contact
         </NavLink>
+      </li>
+      <li>
+        <Link className="uppercase bg-base-200" to="/dashboard">
+          Dashboard
+        </Link>
       </li>
     </>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import Company from "../Company/Company";
 import GetInTouch from "../GetInTouch/GetInTouch";
 import Hero from "../Hero/Hero";
 import OrderStep from "../OrderStep/OrderStep";
@@ -16,6 +17,7 @@ const Home = () => {
       <Teams />
       <Reviews />
       <OrderStep />
+      <Company />
       <GetInTouch />
     </section>
   );
