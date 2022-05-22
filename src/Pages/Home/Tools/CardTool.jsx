@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const CardTool = () => {
+  const navigate = useNavigate();
   return (
     <div className="card  bg-base-100 shadow-xl">
       <figure>
@@ -23,7 +25,12 @@ const CardTool = () => {
           <div className="badge badge-outline">115$</div>
         </div>
         <div class="card-actions justify-end mt-2">
-          <button class="btn btn-primary">Order Now</button>
+          <button
+            onClick={() => navigate(`/purchase/1`)}
+            class="btn btn-primary"
+          >
+            Order Now
+          </button>
         </div>
       </div>
     </div>
