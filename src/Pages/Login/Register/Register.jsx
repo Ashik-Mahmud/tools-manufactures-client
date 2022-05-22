@@ -23,14 +23,12 @@ const Register = () => {
     event.preventDefault();
     const name = event.target.name.value;
     const email = event.target.email.value;
-    const password = event.target.password;
+    const password = event.target.password.value;
     await createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
-        if (res) {
-          updateProfile(res?.user, { displayName: name }).then(() => {
-            toast.success(`Creating & SignIn successfully done.`);
-          });
-        }
+        updateProfile(res?.user, { displayName: name }).then(() => {
+          toast.success(`Creating & SignIn successfully done.`);
+        });
       })
       .catch((err) => {
         console.log(err);

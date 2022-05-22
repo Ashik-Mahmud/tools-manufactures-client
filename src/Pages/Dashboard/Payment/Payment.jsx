@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 const Payment = () => {
   const { paymentId } = useParams();
   const navigate = useNavigate();
+  console.log(paymentId);
   return (
     <div className="grid place-items-center min-h-[80vh] px-3">
       <div className="card shadow p-3 rounded w-full md:w-1/3">
