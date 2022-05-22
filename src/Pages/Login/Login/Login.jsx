@@ -1,7 +1,19 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useFirebase from "../../../Hooks/useFirebase";
 import SocialLogin from "../SocialLogin/SocialLogin";
 const Login = () => {
+  /*  if user is loggedIn */
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  const { isAuth } = useFirebase();
+  useEffect(() => {
+    if (isAuth) {
+      navigate(from, { replace: true });
+    }
+  }, [isAuth, navigate, from]);
+
   return (
     <section className="login grid place-items-center min-h-[90vh] mb-10">
       <div className="login-card flex-col md:flex-row flex gap-1 lg:w-1/2 shadow-sm rounded p-4 md:p-10">

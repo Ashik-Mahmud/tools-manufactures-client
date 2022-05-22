@@ -1,5 +1,7 @@
+import { createContext } from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes, useLocation } from "react-router-dom";
+import useFirebase from "./Hooks/useFirebase";
 import Blogs from "./Pages/Blogs/Blogs";
 import Contact from "./Pages/Contact/Contact";
 import AddProduct from "./Pages/Dashboard/AddProduct/AddProduct";
@@ -20,12 +22,14 @@ import Purchase from "./Pages/Purchase/Purchase";
 import Footer from "./Shared/Footer/Footer";
 import Navbar from "./Shared/Navbar/Navbar";
 import NotFound from "./Shared/NotFound/NotFound";
+export const AuthContext = createContext(null)
 function App() {
   const location = useLocation();
-
+  const {isAuth, user} = useFirebase();
   return (
     <>
     <Toaster />
+    <AuthContext.Provider value={{isAuth, user}}>
     {!location?.pathname.includes("dashboard") && <Navbar />}
       <Routes>
          {/*  Normal Routes */}
@@ -59,7 +63,7 @@ function App() {
       </Routes>
       
       {!location?.pathname.includes("dashboard") && <Footer />}
-      
+      </AuthContext.Provider>
     </>
   );
 }

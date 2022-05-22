@@ -1,8 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useFirebase from "../../../Hooks/useFirebase";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
+  /*  if user is loggedIn */
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+  const { isAuth } = useFirebase();
+  useEffect(() => {
+    if (isAuth) {
+      navigate(from, { replace: true });
+    }
+  }, [isAuth, navigate, from]);
+
   return (
     <div>
       {" "}

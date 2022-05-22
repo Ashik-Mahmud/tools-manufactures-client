@@ -1,8 +1,21 @@
-import React from "react";
+import { signOut } from "firebase/auth";
+import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { BiLogInCircle } from "react-icons/bi";
 import { BsTools } from "react-icons/bs";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../App";
+import auth from "../../Firebase/Firebase.config";
 const Navbar = () => {
+  const { isAuth, user } = useContext(AuthContext);
+
+  /* Handle lot out */
+  const handleLogOut = async () => {
+    await signOut(auth).then(() => {
+      toast.success(`Sign Out successfully done`);
+    });
+  };
+
   /*  Menus */
   const NavbarMenus = (
     <>
@@ -28,11 +41,13 @@ const Navbar = () => {
           Contact
         </NavLink>
       </li>
-      <li>
-        <Link className="uppercase bg-base-200" to="/dashboard">
-          Dashboard
-        </Link>
-      </li>
+      {isAuth && (
+        <li>
+          <Link className="uppercase bg-base-200" to="/dashboard">
+            Dashboard
+          </Link>
+        </li>
+      )}
     </>
   );
 
@@ -75,41 +90,49 @@ const Navbar = () => {
           <ul className="menu menu-horizontal p-0 gap-3">{NavbarMenus}</ul>
         </div>
         <div className="navbar-end gap-3">
-          <NavLink
-            to="/login"
-            className="btn flex gap-2 items-center btn-primary"
-          >
-            <BiLogInCircle /> Login
-          </NavLink>
-          <div className="flex-none gap-2">
-            <div className="dropdown dropdown-end">
-              <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  <img
-                    src="https://api.lorem.space/image/face?hash=33791"
-                    alt="avatar"
-                  />
-                </div>
-              </label>
-              <ul
-                tabIndex="0"
-                className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
-              >
-                <li>
-                  <Link className="justify-between" to="/dashboard/profile">
-                    Profile
-                    <span className="badge">New</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/dashboard">Dashboard</Link>
-                </li>
-                <li>
-                  <a href="/">Logout</a>
-                </li>
-              </ul>
+          {!isAuth && (
+            <NavLink
+              to="/login"
+              className="btn flex gap-2 items-center btn-primary"
+            >
+              <BiLogInCircle /> Login
+            </NavLink>
+          )}
+          {isAuth && (
+            <div className="flex-none gap-2">
+              <div className="dropdown dropdown-end">
+                <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      src={
+                        user?.photoURL
+                          ? user?.photoURL
+                          : "https://api.lorem.space/image/face?hash=33791"
+                      }
+                      alt={user?.displayName}
+                    />
+                  </div>
+                </label>
+                <ul
+                  tabIndex="0"
+                  className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <Link className="justify-between" to="/dashboard/profile">
+                      Profile
+                      <span className="badge">New</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogOut}>Logout</button>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </header>
