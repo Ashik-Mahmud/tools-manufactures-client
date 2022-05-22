@@ -193,7 +193,11 @@ const Portfolios = () => {
                         >
                           Client
                         </a>
-                        <a href="/" target="_blank">
+                        <a
+                          href="https://github.com/Ashik-Mahmud/nodejs-blogs-app-with-mongodb-server"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
                           Server
                         </a>
                       </div>
