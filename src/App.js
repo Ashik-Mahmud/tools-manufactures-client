@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Blogs from "./Pages/Blogs/Blogs";
 import Contact from "./Pages/Contact/Contact";
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <>
+    <Toaster />
     {!location?.pathname.includes("dashboard") && <Navbar />}
       <Routes>
          {/*  Normal Routes */}

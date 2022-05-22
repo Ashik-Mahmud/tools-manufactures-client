@@ -1,6 +1,6 @@
 import React from "react";
-import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
   return (
@@ -78,14 +78,7 @@ const Register = () => {
                   Create Account
                 </button>
               </div>
-              <div className="social-login-card flex items-center gap-4 my-6">
-                <span>Continue With - </span>
-                <div className="btn-groups">
-                  <button className="w-10 h-10 grid place-items-center border rounded">
-                    <FcGoogle />
-                  </button>
-                </div>
-              </div>
+              <SocialLogin />
               <p>
                 Already have an Account?{" "}
                 <Link to="/login" className="text-sm text-primary">
