@@ -1,5 +1,8 @@
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useEffect } from "react";
+import { toast } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import auth from "../../../Firebase/Firebase.config";
 import useFirebase from "../../../Hooks/useFirebase";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
@@ -14,6 +17,26 @@ const Register = () => {
       navigate(from, { replace: true });
     }
   }, [isAuth, navigate, from]);
+
+  /* Handle Create User Registration  */
+  const handleCreateUser = async (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password;
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((res) => {
+        if (res) {
+          updateProfile(res?.user, { displayName: name }).then(() => {
+            toast.success(`Creating & SignIn successfully done.`);
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.message?.split(":")[1]);
+      });
+  };
 
   return (
     <div>
@@ -32,7 +55,7 @@ const Register = () => {
             <p className="text-slate-400 uppercase text-sm mb-5">
               Create Into Account.
             </p>
-            <form action="/">
+            <form action="/" onSubmit={handleCreateUser}>
               <div className="my-2">
                 <label htmlFor="email" className="">
                   Name
@@ -47,12 +70,12 @@ const Register = () => {
                 />
               </div>
               <div className="my-2">
-                <label htmlFor="email" className="">
+                <label htmlFor="role" className="">
                   Role
                 </label>
                 <input
                   type="text"
-                  name="name"
+                  name="role"
                   className="form-control w-full p-3 border rounded outline-none focus:border-success bg-base-200 select-none"
                   id="name"
                   value="User"

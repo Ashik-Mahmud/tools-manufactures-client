@@ -68,7 +68,9 @@ const Dashboard = () => {
               <FaTools className="text-black" />
               Tools House
             </Link>
-            <button className="btn btn-xs btn-outline">LogOut</button>
+            <button onClick={handleLogOut} className="btn btn-xs btn-outline">
+              LogOut
+            </button>
           </div>
           <li className="mt-4">
             <NavLink to="/dashboard/">Dashboard</NavLink>
