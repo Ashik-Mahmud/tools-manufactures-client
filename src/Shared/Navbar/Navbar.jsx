@@ -13,6 +13,7 @@ const Navbar = () => {
   const handleLogOut = async () => {
     await signOut(auth).then(() => {
       toast.success(`Sign Out successfully done`);
+      localStorage.removeItem("accessToken");
     });
   };
 

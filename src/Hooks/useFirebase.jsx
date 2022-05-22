@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import auth from "./../Firebase/Firebase.config";
 const useFirebase = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
 
@@ -27,7 +27,6 @@ const useFirebase = () => {
         setIsAuth(true);
       } else {
         setIsAuth(false);
-        setUser({});
       }
     });
   }, []);

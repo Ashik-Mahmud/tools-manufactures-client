@@ -4,18 +4,22 @@ import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.config";
 import useFirebase from "../../../Hooks/useFirebase";
+import useToken from "../../../Hooks/useToken";
 import SocialLogin from "../SocialLogin/SocialLogin";
 const Login = () => {
   /*  if user is loggedIn */
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
-  const { isAuth } = useFirebase();
+  const { user } = useFirebase();
+  /* call useToken */
+  const [token] = useToken(user);
+
   useEffect(() => {
-    if (isAuth) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [isAuth, navigate, from]);
+  }, [navigate, from, token]);
 
   /* Handle Login User */
   const handleLogin = async (event) => {

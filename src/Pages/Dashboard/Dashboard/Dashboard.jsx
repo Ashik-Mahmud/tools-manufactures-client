@@ -10,6 +10,7 @@ const Dashboard = () => {
   const handleLogOut = async () => {
     await signOut(auth).then(() => {
       toast.success(`Sign out successfully done.`);
+      localStorage.removeItem("accessToken");
     });
   };
 
