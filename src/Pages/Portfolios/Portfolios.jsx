@@ -3,8 +3,10 @@ import { AiFillHtml5 } from "react-icons/ai";
 import {
   FaBootstrap,
   FaCss3,
+  FaFacebook,
   FaFigma,
   FaGithub,
+  FaLinkedin,
   FaNodeJs,
   FaReact,
   FaStripe,
@@ -53,6 +55,32 @@ const Portfolios = () => {
                     And I am quick learner to ready to grab all the latest
                     technologies.
                   </p>
+                  <div className="btn-groups flex items-center gap-2 my-3">
+                    <a
+                      href="https://web.facebook.com/ashikmahmud187/"
+                      target={"_blank"}
+                      className="btn btn-outline btn-sm btn-circle"
+                      rel="noreferrer"
+                    >
+                      <FaFacebook />
+                    </a>
+                    <a
+                      href="https://github.com/Ashik-Mahmud"
+                      target={"_blank"}
+                      className="btn btn-outline btn-sm btn-circle"
+                      rel="noreferrer"
+                    >
+                      <FaGithub />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/ashik-mahmud-1510421b0/"
+                      target={"_blank"}
+                      className="btn btn-outline btn-sm btn-circle"
+                      rel="noreferrer"
+                    >
+                      <FaLinkedin />
+                    </a>
+                  </div>
                 </div>
               </div>
               <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
