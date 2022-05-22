@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.config";
 import useFirebase from "../../../Hooks/useFirebase";
+import useToken from "../../../Hooks/useToken";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
@@ -11,12 +12,13 @@ const Register = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
-  const { isAuth } = useFirebase();
+  const { user } = useFirebase();
+  const [token] = useToken(user);
   useEffect(() => {
-    if (isAuth) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [isAuth, navigate, from]);
+  }, [token, navigate, from]);
 
   /* Handle Create User Registration  */
   const handleCreateUser = async (event) => {
