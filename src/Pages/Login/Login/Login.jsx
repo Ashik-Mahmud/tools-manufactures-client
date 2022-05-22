@@ -1,5 +1,8 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import auth from "../../../Firebase/Firebase.config";
 import useFirebase from "../../../Hooks/useFirebase";
 import SocialLogin from "../SocialLogin/SocialLogin";
 const Login = () => {
@@ -13,6 +16,20 @@ const Login = () => {
       navigate(from, { replace: true });
     }
   }, [isAuth, navigate, from]);
+
+  /* Handle Login User */
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((res) => {
+        if (res) {
+          toast.success(`Sign In successfully done.`);
+        }
+      })
+      .catch((err) => toast.error(err.message.split(":")[1]));
+  };
 
   return (
     <section className="login grid place-items-center min-h-[90vh] mb-10">
@@ -29,7 +46,7 @@ const Login = () => {
           <p className="text-slate-400 uppercase text-sm mb-5">
             Login Into Account.
           </p>
-          <form action="/">
+          <form action="/" onSubmit={handleLogin}>
             <div className="my-2">
               <label htmlFor="email" className="">
                 Email

@@ -21,14 +21,16 @@ const Register = () => {
   /* Handle Create User Registration  */
   const handleCreateUser = async (event) => {
     event.preventDefault();
-    const name = event.target.name.value;
+    const displayName = event.target.username.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
     await createUserWithEmailAndPassword(auth, email, password)
       .then((res) => {
-        updateProfile(res?.user, { displayName: name }).then(() => {
-          toast.success(`Creating & SignIn successfully done.`);
-        });
+        updateProfile(auth?.currentUser, { displayName: displayName }).then(
+          () => {
+            toast.success(`Creating & SignIn successfully done.`);
+          }
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +62,7 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-                  name="name"
+                  name="username"
                   className="form-control w-full p-3 border rounded outline-none focus:border-success bg-transparent"
                   id="name"
                   placeholder="Name"

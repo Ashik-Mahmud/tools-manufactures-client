@@ -27,6 +27,8 @@ export const AuthContext = createContext(null)
 function App() {
   const location = useLocation();
   const {isAuth, user} = useFirebase();
+  
+  
   return (
     <>
     <Toaster />

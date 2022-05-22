@@ -1,18 +1,25 @@
 import React from "react";
+import auth from "../../../Firebase/Firebase.config";
 
 const Profile = () => {
   return (
     <div className="grid place-items-center min-h-[80vh] px-5">
       <div className="profile-card w-full md:w-1/3 text-center shadow-lg rounded-lg bg-base-200 p-7">
-        <div className="avatar w-40 h-40 rounded-full border-8 overflow-hidden mt-[-5rem] z-10">
-          <img
-            src="https://cdn.lorem.space/images/face/.cache/500x0/oliver-ragfelt-khV4fTy6-D8-unsplash.jpg"
-            alt="avatar"
-          />
+        <div className="avatar w-40 h-40 rounded-full border-8 text-7xl font-semibold overflow-hidden mt-[-5rem] z-10 grid place-items-center mx-auto bg-base-200">
+          {auth?.currentUser?.photoURL ? (
+            <img
+              src={auth?.currentUser?.photoURL}
+              alt={auth?.currentUser?.displayName}
+            />
+          ) : (
+            auth?.currentUser?.displayName.slice(0, 1)
+          )}
         </div>
         <div className="info my-2">
-          <h3 className="text-lg font-semibold">Ashik mahmud</h3>
-          <small>ashik@gmail.com</small>
+          <h3 className="text-lg font-semibold">
+            {auth?.currentUser?.displayName}
+          </h3>
+          <small>{auth?.currentUser?.email}</small>
         </div>
         <hr />
         <div className="another-info flex items-center justify-center  flex-col gap-2 my-3">

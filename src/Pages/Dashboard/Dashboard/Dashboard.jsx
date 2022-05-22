@@ -27,15 +27,20 @@ const Dashboard = () => {
           <h3 className="badge badge-primary badge-md">Admin</h3>
           <div className="dropdown dropdown-end">
             <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img
-                  src={
-                    auth?.currentUser?.photoURL
-                      ? auth?.currentUser.photoURL
-                      : "https://api.lorem.space/image/face?hash=33791"
-                  }
-                  alt={auth?.currentUser?.displayName}
-                />
+              <div
+                style={{ display: "grid" }}
+                className="w-10 h-10  place-items-center rounded-full border "
+              >
+                {auth?.currentUser?.photoURL ? (
+                  <img
+                    src={auth?.currentUser?.photoURL}
+                    alt={auth?.currentUser?.displayName}
+                  />
+                ) : (
+                  <span className="t">
+                    {auth?.currentUser?.displayName.slice(0, 1)}
+                  </span>
+                )}
               </div>
             </label>
             <ul
