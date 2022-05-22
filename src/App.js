@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes, useLocation } from "react-router-dom";
+import RequireAuth from "./Auth/RequireAuth";
 import useFirebase from "./Hooks/useFirebase";
 import Blogs from "./Pages/Blogs/Blogs";
 import Contact from "./Pages/Contact/Contact";
@@ -39,12 +40,12 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/portfolios" element={<Portfolios />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/purchase/:purchaseId" element={<Purchase />} />
 
 
          {/* Private Routes  */}
+          <Route path="/purchase/:purchaseId" element={<RequireAuth><Purchase /></RequireAuth>} />
           {/* Dashboard Routes */}
-          <Route path="/dashboard/" element={<Dashboard />} >
+          <Route path="/dashboard/" element={<RequireAuth><Dashboard /></RequireAuth>} >
               <Route index element={<Overview />} /> 
               <Route path="add-product" element={<AddProduct />} /> 
               <Route path="manage-product" element={<ManageProduct />} />

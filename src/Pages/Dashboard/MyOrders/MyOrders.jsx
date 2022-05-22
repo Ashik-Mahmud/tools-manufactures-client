@@ -7,8 +7,8 @@ const MyOrders = () => {
         <h2 className="text-2xl">My Orders</h2>
         <span>Here you will get all the orders.</span>
       </div>
-      <div class="overflow-x-auto">
-        <table class="table w-full">
+      <div className="overflow-x-auto">
+        <table className="table w-full">
           <thead>
             <tr>
               <th></th>

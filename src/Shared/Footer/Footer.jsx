@@ -6,7 +6,7 @@ const Footer = () => {
       className="bg-base-200"
       style={{ clipPath: `ellipse(130% 100% at 51.45% 100%)` }}
     >
-      <div className="footer justify-center items-center pt-36 pb-20 bg-base-200 text-base-content container mx-auto">
+      <div className="footer justify-center md:justify-between items-center pt-36 pb-20 bg-base-200 text-base-content container mx-auto">
         <div>
           <BsTools className="text-4xl" />
           <p>

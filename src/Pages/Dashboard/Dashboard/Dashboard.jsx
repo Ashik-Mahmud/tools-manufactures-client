@@ -1,8 +1,18 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { toast } from "react-hot-toast";
 import { BsGrid } from "react-icons/bs";
 import { FaTools } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import auth from "../../../Firebase/Firebase.config";
 const Dashboard = () => {
+  /* handle log out */
+  const handleLogOut = async () => {
+    await signOut(auth).then(() => {
+      toast.success(`Sign out successfully done.`);
+    });
+  };
+
   return (
     <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -19,8 +29,12 @@ const Dashboard = () => {
             <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img
-                  src="https://api.lorem.space/image/face?hash=33791"
-                  alt="avatar"
+                  src={
+                    auth?.currentUser?.photoURL
+                      ? auth?.currentUser.photoURL
+                      : "https://api.lorem.space/image/face?hash=33791"
+                  }
+                  alt={auth?.currentUser?.displayName}
                 />
               </div>
             </label>
@@ -35,7 +49,7 @@ const Dashboard = () => {
                 </Link>
               </li>
               <li>
-                <a href="/">Logout</a>
+                <button onClick={handleLogOut}>Logout</button>
               </li>
             </ul>
           </div>
