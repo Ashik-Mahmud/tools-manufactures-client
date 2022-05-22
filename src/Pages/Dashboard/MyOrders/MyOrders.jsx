@@ -18,6 +18,8 @@ const MyOrders = () => {
               <th>Prices (per)</th>
               <th>Address</th>
               <th>Phone</th>
+              <th>TransactionID</th>
+              <th>Status</th>
               <th>Pay</th>
               <th>Delete</th>
             </tr>

@@ -19,6 +19,12 @@ const OrderRow = () => {
       <td>Dhaka, Bangladesh</td>
       <td>017845785487</td>
       <td>
+        <small>Not Available yet.</small>
+      </td>
+      <td>
+        <button className="btn btn-accent btn-sm">UNPAID</button>
+      </td>
+      <td>
         <button className="btn-sm btn btn-primary">Pay 184$</button>
       </td>
       <td>
