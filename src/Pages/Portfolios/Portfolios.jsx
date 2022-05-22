@@ -179,9 +179,23 @@ const Portfolios = () => {
                     <div className="project shadow rounded p-3">
                       <h3 className="text-lg">Blog Application</h3>
                       <div className="flex justify-around items-center my-2 text-sm text-primary">
-                        <a href="/">Live</a>
-                        <a href="/">Client</a>
-                        <a href="/">Server</a>
+                        <a
+                          href="https://blog-app-4c053.web.app/"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Live
+                        </a>
+                        <a
+                          href="https://github.com/Ashik-Mahmud/nodejs-blogs-app-with-mongodb"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Client
+                        </a>
+                        <a href="/" target="_blank">
+                          Server
+                        </a>
                       </div>
                       <ul className="text-sm flex flex-wrap gap-1">
                         <li className="bg-base-200 p-1 rounded text-xs">

@@ -7,6 +7,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard/Dashboard";
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin/MakeAdmin";
 import ManageOrder from "./Pages/Dashboard/ManageOrder/ManageOrder";
 import ManageProduct from "./Pages/Dashboard/ManageProduct/ManageProduct";
+import MyOrders from "./Pages/Dashboard/MyOrders/MyOrders";
 import Overview from "./Pages/Dashboard/Overview/Overview";
 import Payment from "./Pages/Dashboard/Payment/Payment";
 import Profile from "./Pages/Dashboard/Profile/Profile";
@@ -42,6 +43,7 @@ function App() {
               <Route path="add-product" element={<AddProduct />} /> 
               <Route path="manage-product" element={<ManageProduct />} />
               <Route path="manage-order" element={<ManageOrder />} /> 
+              <Route path="my-orders" element={<MyOrders />} /> 
               <Route path="profile" element={<Profile />} /> 
               <Route path="add-review" element={<AddReview />} /> 
               <Route path="make-admin" element={<MakeAdmin />}/>
