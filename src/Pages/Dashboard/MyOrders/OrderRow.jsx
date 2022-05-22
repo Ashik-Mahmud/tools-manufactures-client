@@ -1,7 +1,9 @@
 import React from "react";
 import { BsTrash } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const OrderRow = () => {
+  const navigate = useNavigate();
   return (
     <tr>
       <th>1</th>
@@ -25,7 +27,12 @@ const OrderRow = () => {
         <button className="btn btn-accent btn-sm">UNPAID</button>
       </td>
       <td>
-        <button className="btn-sm btn btn-primary">Pay 184$</button>
+        <button
+          onClick={() => navigate(`/dashboard/payment/1`)}
+          className="btn-sm btn btn-primary"
+        >
+          Pay 184$
+        </button>
       </td>
       <td>
         <button className="btn btn-error btn-sm">

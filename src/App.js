@@ -44,10 +44,10 @@ function App() {
               <Route path="manage-product" element={<ManageProduct />} />
               <Route path="manage-order" element={<ManageOrder />} /> 
               <Route path="my-orders" element={<MyOrders />} /> 
+              <Route path="payment/:paymentId" element={<Payment />} />
               <Route path="profile" element={<Profile />} /> 
               <Route path="add-review" element={<AddReview />} /> 
               <Route path="make-admin" element={<MakeAdmin />}/>
-              <Route path="payment" element={<Payment />} />
           </Route>
 
 
