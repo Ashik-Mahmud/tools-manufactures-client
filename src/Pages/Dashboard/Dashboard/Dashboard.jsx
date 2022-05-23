@@ -5,7 +5,10 @@ import { BsGrid } from "react-icons/bs";
 import { FaTools } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.config";
+import useAdmin from "../../../Hooks/useAdmin";
 const Dashboard = () => {
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
   /* handle log out */
   const handleLogOut = async () => {
     await signOut(auth).then(() => {
@@ -81,27 +84,38 @@ const Dashboard = () => {
           <li className="mt-4">
             <NavLink to="/dashboard/">Dashboard</NavLink>
           </li>
-          <li>
-            <NavLink to="/dashboard/my-orders">My Orders</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/add-review">Add Review</NavLink>
-          </li>
+          {!isAdmin && (
+            <>
+              <li>
+                <NavLink to="/dashboard/my-orders">My Orders</NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/add-review">Add Review</NavLink>
+              </li>
+            </>
+          )}
+
           <li>
             <NavLink to="/dashboard/profile">Profile</NavLink>
           </li>
-          <li className="mt-4">
-            <NavLink to="/dashboard/add-product">Add Product</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/manage-product">Product Management</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/manage-order">Order Management</NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/make-admin">Make Admin</NavLink>
-          </li>
+          {isAdmin && (
+            <>
+              <li className="mt-4">
+                <NavLink to="/dashboard/add-product">Add Product</NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/manage-product">
+                  Product Management
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/manage-order">Order Management</NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/make-admin">Make Admin</NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>
