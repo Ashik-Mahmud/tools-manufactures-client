@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { MdArrowBackIos } from "react-icons/md";
 import { useQuery } from "react-query";
@@ -7,6 +7,7 @@ import Loader from "../../Components/Loader/Loader";
 import auth from "../../Firebase/Firebase.config";
 const Purchase = () => {
   const [error, setError] = useState("");
+  const formRef = useRef(null);
   const navigate = useNavigate();
   const { purchaseId } = useParams();
   const { data, isLoading } = useQuery("products", () =>
@@ -55,6 +56,7 @@ const Purchase = () => {
       author: {
         name: auth?.currentUser?.displayName,
         email: auth?.currentUser?.email,
+        uid: auth?.currentUser?.uid,
       },
       createdAt:
         new Date().toDateString() + "-" + new Date().toLocaleTimeString(),
@@ -68,13 +70,17 @@ const Purchase = () => {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        "Content-Type": "application/",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
+        if (result.success) {
+          toast.success(result?.message);
+          formRef.current.reset();
+        }
       });
   };
 
@@ -126,7 +132,7 @@ const Purchase = () => {
             </div>
           </div>
           <div>
-            <form onSubmit={handlePlaceOrderForm} action="">
+            <form ref={formRef} onSubmit={handlePlaceOrderForm} action="">
               <div className="flex flex-col gap-2">
                 <label htmlFor="name">Name</label>
                 <input
