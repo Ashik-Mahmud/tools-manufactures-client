@@ -2,6 +2,14 @@
 
 This is tools house application for selling tools around the world. you can purchase any of the tools here in wholesale prices. For more information get the future versions.
 
+# Here Additional Links
+
+### Client Preview Link [Click Here](https://tools-manufactures.web.app/)
+
+### Server Link [Click Here](https://github.com/programming-hero-web-course1/manufacturer-website-server-side-Ashik-Mahmud)
+
+---
+
 ## Using Technologies
 
 - React js
@@ -26,7 +34,7 @@ These are technologies which one use to create this application.
 
 ---
 
-## Here is Live Link of This application [Go Live Link](https://tools-manufactures.web.app/) || <https://tools-manufactures.web.app//>
+## Here is Live Link of This application <https://tools-manufactures.web.app//>
 
 ---
 
