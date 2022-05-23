@@ -6,7 +6,7 @@ const Overview = () => {
       <img
         src="https://www.hrinasia.com/wp-content/uploads/2016/08/Top-Four-Common-Onboarding-Mistakes-to-Avoid.png"
         alt="welcomeImage"
-        className="max-w-lg"
+        className="md:max-w-lg"
       />
     </div>
   );
