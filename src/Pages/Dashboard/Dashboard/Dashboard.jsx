@@ -8,7 +8,7 @@ import auth from "../../../Firebase/Firebase.config";
 import useAdmin from "../../../Hooks/useAdmin";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
-  console.log(isAdmin);
+
   /* handle log out */
   const handleLogOut = async () => {
     await signOut(auth).then(() => {

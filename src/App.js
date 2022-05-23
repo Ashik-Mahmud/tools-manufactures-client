@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { Toaster } from "react-hot-toast";
 import { Route, Routes, useLocation } from "react-router-dom";
+import RequireAdmin from "./Auth/RequireAdmin";
 import RequireAuth from "./Auth/RequireAuth";
 import useFirebase from "./Hooks/useFirebase";
 import Blogs from "./Pages/Blogs/Blogs";
@@ -49,14 +50,14 @@ function App() {
           {/* Dashboard Routes */}
           <Route path="/dashboard/" element={<RequireAuth><Dashboard /></RequireAuth>} >
               <Route index element={<Overview />} /> 
-              <Route path="add-product" element={<AddProduct />} /> 
-              <Route path="manage-product" element={<ManageProduct />} />
-              <Route path="manage-order" element={<ManageOrder />} /> 
+              <Route path="add-product" element={<RequireAdmin><AddProduct /></RequireAdmin>} /> 
+              <Route path="manage-product" element={<RequireAdmin><ManageProduct /></RequireAdmin>} />
+              <Route path="manage-order" element={<RequireAdmin><ManageOrder /></RequireAdmin>} /> 
               <Route path="my-orders" element={<MyOrders />} /> 
               <Route path="payment/:paymentId" element={<Payment />} />
               <Route path="profile" element={<Profile />} /> 
               <Route path="add-review" element={<AddReview />} /> 
-              <Route path="make-admin" element={<MakeAdmin />}/>
+              <Route path="make-admin" element={<RequireAdmin><MakeAdmin /></RequireAdmin>}/>
           </Route>
 
 
