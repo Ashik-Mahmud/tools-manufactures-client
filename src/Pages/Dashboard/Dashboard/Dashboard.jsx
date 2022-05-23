@@ -98,6 +98,7 @@ const Dashboard = () => {
           <li>
             <NavLink to="/dashboard/profile">Profile</NavLink>
           </li>
+
           {isAdmin && (
             <>
               <li className="mt-4">
