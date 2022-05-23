@@ -1,13 +1,46 @@
 import React from "react";
 import { BsTrash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import auth from "../../../Firebase/Firebase.config";
 
-const OrderRow = ({ author, productInfo, address }) => {
+const OrderRow = ({ productInfo, address, serialize, _id, refetch }) => {
   const navigate = useNavigate();
   const { productName, price, orderQty, image } = productInfo;
+  /* Handle Delete Order */
+  const deleteOrder = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(
+          `http://localhost:5000/orders?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            if (result.success) {
+              refetch();
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          });
+      }
+    });
+  };
   return (
     <tr>
-      <th>1</th>
+      <th>{serialize + 1}</th>
       <td>
         <img
           src={image}
@@ -29,14 +62,17 @@ const OrderRow = ({ author, productInfo, address }) => {
       </td>
       <td>
         <button
-          onClick={() => navigate(`/dashboard/payment/1`)}
+          onClick={() => navigate(`/dashboard/payment/${_id}`)}
           className="btn-sm btn btn-primary"
         >
-          Pay 184$
+          Pay {Number(price) * Number(orderQty)}$
         </button>
       </td>
       <td>
-        <button className="btn btn-error btn-sm">
+        <button
+          onClick={() => deleteOrder(_id)}
+          className="btn btn-error btn-sm"
+        >
           <BsTrash />
         </button>
       </td>

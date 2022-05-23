@@ -4,7 +4,7 @@ import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
 import OrderRow from "./OrderRow";
 const MyOrders = () => {
-  const { data, isLoading } = useQuery("Orders", () =>
+  const { data, isLoading, refetch } = useQuery("Orders", () =>
     fetch(`http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -39,8 +39,13 @@ const MyOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {orderData.map((order) => (
-                <OrderRow key={order._id} {...order} />
+              {orderData.map((order, ind) => (
+                <OrderRow
+                  key={order._id}
+                  {...order}
+                  serialize={ind}
+                  refetch={refetch}
+                />
               ))}
             </tbody>
           </table>
