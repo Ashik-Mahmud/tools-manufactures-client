@@ -4,7 +4,6 @@ import ReactStars from "react-stars";
 import auth from "../../../Firebase/Firebase.config";
 const AddReview = () => {
   const [rating, setRating] = useState(0);
-  console.log(rating);
 
   /* Handle Add Review */
   const handleAddReview = async (event) => {
@@ -17,9 +16,10 @@ const AddReview = () => {
       author: {
         name: auth?.currentUser?.displayName,
         uid: auth?.currentUser?.uid,
+        photo: auth?.currentUser?.photoURL,
       },
     };
-    if (rating || reviewText) {
+    if (rating && reviewText) {
       await fetch(
         `http://localhost:5000/review?uid=${auth?.currentUser?.uid}`,
         {
@@ -33,7 +33,10 @@ const AddReview = () => {
       )
         .then((res) => res.json())
         .then((result) => {
-          console.log(result);
+          if (result.success) {
+            toast.success(result.message);
+            event.target.reset();
+          }
         });
     } else {
       toast.error(`Provide Valid Information`);
