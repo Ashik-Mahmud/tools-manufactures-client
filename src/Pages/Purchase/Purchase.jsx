@@ -76,10 +76,11 @@ const Purchase = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
         if (result.success) {
           toast.success(result?.message);
           formRef.current.reset();
+        } else {
+          toast.error(result?.message);
         }
       });
   };

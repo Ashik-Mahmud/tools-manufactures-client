@@ -2,24 +2,25 @@ import React from "react";
 import { BsTrash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-const OrderRow = () => {
+const OrderRow = ({ author, productInfo, address }) => {
   const navigate = useNavigate();
+  const { productName, price, orderQty, image } = productInfo;
   return (
     <tr>
       <th>1</th>
       <td>
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8yM8W73QZ_kfxfNUZbmcWKIISTgMFLk7Tx7IzV_LDdfO_gT0kSukrDQL5h_K4MVCD6VI&usqp=CAU"
-          alt="avatar"
+          src={image}
+          alt={productName}
           width={60}
           className="rounded shadow-sm bg-base-300 border p-1"
         />
       </td>
-      <td>Stripper </td>
-      <td>120pcs</td>
-      <td>184$</td>
-      <td>Dhaka, Bangladesh</td>
-      <td>017845785487</td>
+      <td>{productName} </td>
+      <td>{orderQty}pcs</td>
+      <td>{price}$</td>
+      <td>{address?.address}</td>
+      <td>{address?.phone}</td>
       <td>
         <small>Not Available yet.</small>
       </td>
