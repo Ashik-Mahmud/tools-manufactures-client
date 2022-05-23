@@ -45,7 +45,12 @@ const Profile = () => {
       },
     }).then((res) => res.json())
   );
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <div className="md:p-80">
+        <Loader />
+      </div>
+    );
 
   const { address, education, number, linkedin, facebook } = result?.result;
 

@@ -1,23 +1,62 @@
 import React from "react";
 import { toast } from "react-hot-toast";
-const AdminRow = ({ uid, serialize, email, role, refetch }) => {
+import { RiDeleteBack2Line } from "react-icons/ri";
+import Swal from "sweetalert2";
+import auth from "../../../Firebase/Firebase.config";
+const AdminRow = ({ uid, serialize, email, role, refetch, _id }) => {
   /* Handle Make Admin  */
   const handleMakeAdmin = async (id) => {
-    await fetch(`http://localhost:5000/users/admin?uid=${id}`, {
-      method: "PATCH",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ role: "admin" }),
-    })
+    await fetch(
+      `http://localhost:5000/users/admin?uid=${id}&&currentUserId=${auth?.currentUser?.uid}`,
+      {
+        method: "PATCH",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ role: "admin" }),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
+        console.log(result);
         if (result.success) {
           toast.success(result?.message);
           refetch();
         }
       });
+  };
+
+  /* Handle delete User */
+  const handleDeleteUser = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(
+          `http://localhost:5000/users?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            if (result.success) {
+              refetch();
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          });
+      }
+    });
   };
 
   return (
@@ -39,6 +78,11 @@ const AdminRow = ({ uid, serialize, email, role, refetch }) => {
           disabled={role === "admin" && true}
         >
           Make Admin
+        </button>
+      </td>
+      <td>
+        <button onClick={() => handleDeleteUser(_id)}>
+          <RiDeleteBack2Line />
         </button>
       </td>
     </tr>

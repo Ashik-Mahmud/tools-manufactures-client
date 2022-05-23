@@ -13,6 +13,7 @@ const MakeAdmin = () => {
   );
 
   const usersData = data?.result;
+
   return (
     <div className="p-4">
       <div className="title py-3">
@@ -30,6 +31,7 @@ const MakeAdmin = () => {
                 <th>Email</th>
                 <th>Role</th>
                 <th>Action</th>
+                <th>delete</th>
               </tr>
             </thead>
             <tbody>
