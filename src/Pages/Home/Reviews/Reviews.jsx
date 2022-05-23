@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import Loader from "../../../Components/Loader/Loader";
 import TItle from "../../../Components/TItle/TItle";
 import CardReview from "./CardReview";
 const Reviews = () => {
@@ -30,6 +31,18 @@ const Reviews = () => {
       },
     ],
   };
+
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    fetch(`http://localhost:5000/reviews`)
+      .then((res) => res.json())
+      .then((result) => {
+        setLoading(true);
+        setReviews(result?.result);
+      });
+  }, []);
+
   return (
     <section className="reviews py-20 px-6 sm:px-0">
       <div className="container mx-auto">
@@ -37,18 +50,17 @@ const Reviews = () => {
           title="Testimonial by Customer"
           subTitle="What Customer say about us?"
         />
-        <div className="reviews-content">
-          <Slider {...settings}>
-            <CardReview />
-            <CardReview />
-            <CardReview />
-            <CardReview />
-            <CardReview />
-            <CardReview />
-            <CardReview />
-            <CardReview />
-          </Slider>
-        </div>
+        {loading ? (
+          <div className="reviews-content">
+            <Slider {...settings}>
+              {reviews.map((review) => (
+                <CardReview key={review._id} {...review} />
+              ))}
+            </Slider>
+          </div>
+        ) : (
+          <Loader />
+        )}
       </div>
     </section>
   );

@@ -21,7 +21,7 @@ const AddReview = () => {
     };
     if (rating && reviewText) {
       await fetch(
-        `http://localhost:5000/review?uid=${auth?.currentUser?.uid}`,
+        `http://localhost:5000/reviews?uid=${auth?.currentUser?.uid}`,
         {
           method: "POST",
           headers: {

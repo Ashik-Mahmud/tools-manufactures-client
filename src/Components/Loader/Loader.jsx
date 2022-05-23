@@ -2,8 +2,8 @@ import React from "react";
 import HashLoader from "react-spinners/HashLoader";
 const Loader = () => {
   return (
-    <div>
-      <HashLoader color={"#1c95f8"} size={150} />
+    <div className="text-center py-20">
+      <HashLoader color={"#1c95f8"} size={100} />
     </div>
   );
 };
