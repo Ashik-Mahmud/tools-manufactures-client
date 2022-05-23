@@ -4,7 +4,7 @@ import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
 import AdminRow from "./AdminRow";
 const MakeAdmin = () => {
-  const { data, isLoading } = useQuery("Users", () =>
+  const { data, isLoading, refetch } = useQuery("Users", () =>
     fetch(`http://localhost:5000/users/all?uid=${auth?.currentUser.uid}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -34,7 +34,12 @@ const MakeAdmin = () => {
             </thead>
             <tbody>
               {usersData.map((user, ind) => (
-                <AdminRow key={user._id} {...user} serialize={ind} />
+                <AdminRow
+                  key={user._id}
+                  {...user}
+                  serialize={ind}
+                  refetch={refetch}
+                />
               ))}
             </tbody>
           </table>

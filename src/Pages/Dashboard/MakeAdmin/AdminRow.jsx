@@ -1,16 +1,22 @@
 import React from "react";
-
-const AdminRow = ({ uid, serialize, email }) => {
+import { toast } from "react-hot-toast";
+const AdminRow = ({ uid, serialize, email, role, refetch }) => {
   /* Handle Make Admin  */
   const handleMakeAdmin = async (id) => {
-    await fetch(`http://localhost:5000/users/admin/${id}`, {
+    await fetch(`http://localhost:5000/users/admin?uid=${id}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ role: "admin" }),
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        if (result.success) {
+          toast.success(result?.message);
+          refetch();
+        }
       });
   };
 
@@ -20,12 +26,17 @@ const AdminRow = ({ uid, serialize, email }) => {
       <td>{uid}</td>
       <td>{email}</td>
       <td>
-        <button className="badge badge-success">User</button>
+        {role === "admin" ? (
+          <button className="badge badge-primary">Admin</button>
+        ) : (
+          <button className="badge badge-success">User</button>
+        )}
       </td>
       <td>
         <button
           onClick={() => handleMakeAdmin(uid)}
           className="btn btn-primary btn-sm"
+          disabled={role === "admin" && true}
         >
           Make Admin
         </button>

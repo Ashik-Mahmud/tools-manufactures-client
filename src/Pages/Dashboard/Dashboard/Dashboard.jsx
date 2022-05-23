@@ -25,7 +25,7 @@ const Dashboard = () => {
           >
             <BsGrid className="text-2xl" />
           </label>
-          <h3 className="badge badge-primary badge-md">Admin</h3>
+          <h3 className="badge badge-primary badge-md">Testing</h3>
           <div className="dropdown dropdown-end">
             <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
               <div
