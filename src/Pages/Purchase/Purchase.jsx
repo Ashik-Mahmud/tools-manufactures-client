@@ -1,34 +1,57 @@
 import React from "react";
-
+import { MdArrowBackIos } from "react-icons/md";
+import { useQuery } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import Loader from "../../Components/Loader/Loader";
+import auth from "../../Firebase/Firebase.config";
 const Purchase = () => {
+  const navigate = useNavigate();
+  const { purchaseId } = useParams();
+  const { data, isLoading } = useQuery("products", () =>
+    fetch(
+      `http://localhost:5000/products/one?uid=${auth?.currentUser?.uid}&&purchaseId=${purchaseId}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => res.json())
+  );
+  const purchaseProduct = data?.result;
+
+  if (isLoading) return <Loader />;
   return (
     <section className="p-4 md:p-10">
       <div className="container mx-auto">
-        <h3 className="text-3xl">Purchase</h3>
         <div className="purchase-content shadow my-5 p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h3 className="text-2xl">Product name goes here</h3>
+            <div className="flex items-center gap-2">
+              <MdArrowBackIos
+                onClick={() => navigate(-1)}
+                className="cursor-pointer"
+              />
+              <h3 className="text-2xl">{purchaseProduct?.productName}</h3>
+            </div>
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8yM8W73QZ_kfxfNUZbmcWKIISTgMFLk7Tx7IzV_LDdfO_gT0kSukrDQL5h_K4MVCD6VI&usqp=CAU"
-              alt=""
+              src={purchaseProduct?.image}
+              alt={purchaseProduct?.productName}
               className="w-full h-80 object-contain"
             />
             <ul className="flex flex-wrap items-center gap-3">
               <li>
-                Maximum Order Quantity - <strong>100pcs</strong>
+                Maximum Order Quantity -
+                <strong>{purchaseProduct?.orderQty}pcs</strong>
               </li>
               <li>
-                Available Quantity - <strong>1000pcs</strong>
+                Available Quantity -
+                <strong>{purchaseProduct?.availableQty}pcs</strong>
               </li>
               <li>
-                Per Unit Prices - <strong>112$</strong>
+                Per Unit Prices - <strong>{purchaseProduct?.price}$</strong>
               </li>
             </ul>
             <div className="desc my-4 text-sm text-slate-500 font-montserrat">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio,
-              consequatur perferendis assumenda, harum deserunt, modi voluptatum
-              voluptas obcaecati dolor beatae atque praesentium! Voluptatum,
-              error voluptates dolores minus odio amet laudantium.
+              {purchaseProduct?.productDescription}
             </div>
           </div>
           <div>

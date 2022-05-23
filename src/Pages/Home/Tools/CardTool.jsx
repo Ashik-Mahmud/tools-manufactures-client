@@ -1,32 +1,37 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const CardTool = () => {
+const CardTool = ({
+  image,
+  productName,
+  productDescription,
+  availableQty,
+  orderQty,
+  price,
+  _id,
+}) => {
   const navigate = useNavigate();
   return (
     <div className="card  bg-base-100 shadow-xl">
       <figure>
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8yM8W73QZ_kfxfNUZbmcWKIISTgMFLk7Tx7IzV_LDdfO_gT0kSukrDQL5h_K4MVCD6VI&usqp=CAU"
-          alt="Shoes"
-        />
+        <img src={image} className="h-52" alt="Shoes" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">
-          Wire Stripper with Strip Clip
+          {productName}
           <div className="badge badge-secondary">NEW</div>
         </h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
+        <p>{productDescription.slice(0, 60)}</p>
         <div className="card-actions justify-end">
-          <div className="badge badge-outline">
-            <span title="Minimum Order Quantity">MOQ</span>- 100pcs
+          <div className="badge badge-ghost">
+            <span title="Minimum Order Quantity">MOQ</span>- {orderQty}pcs
           </div>
-          <div className="badge badge-outline">Available- 1000pcs</div>
-          <div className="badge badge-outline">115$</div>
+          <div className="badge badge-ghost">Available- {availableQty}pcs</div>
+          <div className="badge badge-ghost">{price}$</div>
         </div>
         <div className="card-actions justify-end mt-2">
           <button
-            onClick={() => navigate(`/purchase/1`)}
+            onClick={() => navigate(`/purchase/${_id}`)}
             className="btn btn-primary"
           >
             Order Now
