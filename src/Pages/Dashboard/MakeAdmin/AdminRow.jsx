@@ -19,7 +19,6 @@ const AdminRow = ({ uid, serialize, email, role, refetch, _id }) => {
     )
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
         if (result.success) {
           toast.success(result?.message);
           refetch();
@@ -69,6 +68,15 @@ const AdminRow = ({ uid, serialize, email, role, refetch, _id }) => {
           <button className="badge badge-primary">Admin</button>
         ) : (
           <button className="badge badge-success">User</button>
+        )}
+      </td>
+      <td>
+        {auth?.currentUser?.uid === uid ? (
+          <span className="badge bg-green-300 border-green-300 text-white">
+            Active{" "}
+          </span>
+        ) : (
+          ""
         )}
       </td>
       <td>

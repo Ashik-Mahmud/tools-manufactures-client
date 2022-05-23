@@ -30,6 +30,7 @@ const MakeAdmin = () => {
                 <th>User Id</th>
                 <th>Email</th>
                 <th>Role</th>
+                <th>isLogin</th>
                 <th>Action</th>
                 <th>delete</th>
               </tr>
