@@ -43,6 +43,17 @@ const AddReview = () => {
     }
   };
 
+  /* Handle Review Text Limit */
+  const [reviewError, setReviewError] = useState("");
+  const handleReviewTextLimit = (e) => {
+    const reviewText = e.target.value;
+    if (reviewText.length === 250) {
+      setReviewError(`Stop! Enough`);
+    } else {
+      setReviewError(null);
+    }
+  };
+
   return (
     <div className="p-5">
       <div className="title">
@@ -55,10 +66,18 @@ const AddReview = () => {
       >
         <div>
           <textarea
-            className="textarea textarea-bordered w-full"
+            className={`textarea textarea-bordered w-full ${
+              reviewError &&
+              "border-error outline-error shadow-error focus:outline-error"
+            }`}
             placeholder="Review Description"
             name="reviewText"
+            maxLength={250}
+            onChange={handleReviewTextLimit}
           ></textarea>
+          {reviewError && (
+            <small className="block text-error">{reviewError}</small>
+          )}
         </div>
         <div>
           <ReactStars
