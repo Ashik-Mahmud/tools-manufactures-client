@@ -32,7 +32,7 @@ const Portfolios = () => {
               <img
                 alt="content"
                 className="object-cover object-center h-full w-full"
-                src="https://i.ibb.co/TwPwRHK/Facebook-Cover-Photo.png"
+                src="https://i.ibb.co/gm4HgZ9/Facebook-Cover-Photo.png"
               />
             </div>
             <div className="flex flex-col sm:flex-row mt-10">
