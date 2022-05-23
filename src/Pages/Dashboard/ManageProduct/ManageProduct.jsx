@@ -4,7 +4,7 @@ import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
 import ProductRow from "./ProductRow";
 const ManageProduct = () => {
-  const { data, isLoading } = useQuery("products", () =>
+  const { data, isLoading, refetch } = useQuery("products", () =>
     fetch(`http://localhost:5000/products?uid=${auth?.currentUser?.uid}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -29,6 +29,7 @@ const ManageProduct = () => {
               <tr>
                 <th></th>
                 <th>Name</th>
+                <th>Creator</th>
                 <th>Available Quantity</th>
                 <th>Maximum Order Quantity</th>
                 <th>Price</th>
@@ -38,7 +39,12 @@ const ManageProduct = () => {
             </thead>
             <tbody>
               {productData.map((product, ind) => (
-                <ProductRow key={product._id} {...product} serialize={ind} />
+                <ProductRow
+                  key={product._id}
+                  {...product}
+                  serialize={ind}
+                  refetch={refetch}
+                />
               ))}
             </tbody>
           </table>
