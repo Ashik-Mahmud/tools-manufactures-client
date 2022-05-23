@@ -1,10 +1,91 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import auth from "../../../Firebase/Firebase.config";
 const AddProduct = () => {
+  const upload_api_key = `e30b0e0fb6ea0d2a6ec59a91cf20ebbd`;
+  const [isFile, setIsFile] = useState(false);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
+
+  const [loading, setLoading] = useState("false");
+  const onSubmit = (data) => {
+    setLoading(false);
+    /* UPLOAD IMAGE INTO IMGBB */
+    if (!isFile) {
+      const url = `https://api.imgbb.com/1/upload?key=${upload_api_key}`;
+
+      /* processing image */
+      const formData = new FormData();
+      const image = data.productImage[0];
+      formData.append("image", image);
+
+      fetch(url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (result?.success) {
+            saveProductOnMongodb(result?.data?.url, data);
+            setLoading(true);
+          }
+        });
+    } else {
+      const inputURL = data.imageUrl;
+      saveProductOnMongodb(inputURL, data);
+      setLoading(true);
+    }
+  };
+
+  /* Save Product On MONGODB Database */
+  const saveProductOnMongodb = async (image, data) => {
+    const productData = {
+      productName: data?.productName,
+      availableQty: data?.availableProductQty,
+      orderQty: data?.maximumOrderQty,
+      price: data?.price,
+      productDescription: data?.productDescription,
+      image: image,
+      createdAt: new Date().toDateString(),
+      creator: {
+        name: auth?.currentUser?.displayName,
+        uid: auth?.currentUser?.uid,
+      },
+    };
+
+    await fetch(
+      `http://localhost:5000/products?uid=${auth?.currentUser?.uid}`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productData),
+      }
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        if (result?.success) {
+          toast.success(result?.message);
+          reset();
+        }
+      });
+  };
+
   return (
     <div className="p-5">
       <h3 className="text-2xl font-semibold mb-2">Add Product</h3>
-      <form action="" className="shadow rounded bg-base-100 p-5 md:p-10">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        action=""
+        className="shadow rounded bg-base-100 p-5 md:p-10"
+      >
         <div className="my-2">
           <label htmlFor="name" className="my-2">
             Product Name
@@ -13,7 +94,11 @@ const AddProduct = () => {
             type="text"
             placeholder="Product Name"
             className="input input-bordered w-full"
+            {...register("productName", { required: true })}
           />
+          {errors.productName?.type === "required" && (
+            <span className="text-error">Product name is required</span>
+          )}
         </div>
         <div className="flex flex-col md:flex-row items-center gap-3 w-full">
           <div className="my-2 w-full">
@@ -21,31 +106,47 @@ const AddProduct = () => {
               Available Product Quantity
             </label>
             <input
-              type="text"
+              type="number"
               placeholder="Available Product Quantity"
               className="input input-bordered w-full"
               id="availableProduct"
+              {...register("availableProductQty", { required: true })}
             />
+            {errors.availableProductQty?.type === "required" && (
+              <span className="text-error">
+                Available Product Quantity is required
+              </span>
+            )}
           </div>
           <div className="my-2 w-full">
             <label htmlFor="maximum" className="my-2">
               Maximum Product Quantity
             </label>
             <input
-              type="text"
+              type="number"
               placeholder="Maximum Product Quantity"
               className="input input-bordered w-full"
+              {...register("maximumOrderQty", { required: true })}
             />
+            {errors.maximumOrderQty?.type === "required" && (
+              <span className="text-error">
+                Maximum Order Quantity is required
+              </span>
+            )}
           </div>
           <div className="my-2 w-full">
             <label htmlFor="name" className="my-2">
               Product Per Price
             </label>
             <input
-              type="text"
+              type="number"
               placeholder="Product Per Price"
               className="input input-bordered w-full"
+              {...register("price", { required: true })}
             />
+            {errors.price?.type === "required" && (
+              <span className="text-error">Price Field is required</span>
+            )}
           </div>
         </div>
         <div className="my-2">
@@ -58,14 +159,56 @@ const AddProduct = () => {
             className="textarea textarea-bordered w-full my-1"
             cols="30"
             placeholder="Product Description"
-            rows="4"
+            rows="2"
+            {...register("productDescription", { required: true })}
           ></textarea>
+          {errors.productDescription?.type === "required" && (
+            <span className="text-error">
+              Product Description Field is required
+            </span>
+          )}
         </div>
         <div>
-          <input type="file" name="file" className="block" id="file" />
+          <label htmlFor="file" className="my-2 block">
+            Image
+            <button
+              type="button"
+              className="btn btn-xs"
+              onClick={() => setIsFile((prev) => !prev)}
+            >
+              {isFile ? "Upload" : "URL"}
+            </button>
+          </label>
+          {isFile ? (
+            <input
+              type="url"
+              name="file"
+              className="input input-bordered w-full"
+              placeholder="Put Your Image Link"
+              id="file"
+              {...register("imageUrl", { required: true })}
+            />
+          ) : (
+            <input
+              type="file"
+              name="file"
+              className="block border p-2 w-full rounded"
+              id="file"
+              {...register("productImage", { required: true })}
+            />
+          )}
+
+          {errors.productImage?.type === "required" ||
+            (errors.imageUrl?.type === "required" && (
+              <span className="text-error">
+                Product Image Field is required
+              </span>
+            ))}
         </div>
         <div className="my-3 text-right">
-          <button className="btn btn-primary">Save Product</button>
+          <button className="btn btn-primary" disabled={!loading && true}>
+            {!loading ? "Sending Product..." : "Save Product"}
+          </button>
         </div>
       </form>
     </div>
