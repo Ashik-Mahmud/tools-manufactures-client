@@ -17,8 +17,8 @@ const Dashboard = () => {
   return (
     <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content p-3 md:p-6">
-        <div className="header sticky top-0 flex justify-between items-center bg-base-200 p-4 rounded">
+      <div className="drawer-content p-3 md:p-3">
+        <div className="header z-50  sticky top-0 flex justify-between items-center bg-base-200 p-4 rounded">
           <label
             htmlFor="my-drawer-2"
             className="btn bg-base-200 text-black drawer-button lg:hidden "
