@@ -10,6 +10,7 @@ const Purchase = () => {
   const formRef = useRef(null);
   const navigate = useNavigate();
   const { purchaseId } = useParams();
+
   const { data, isLoading } = useQuery("products", () =>
     fetch(
       `http://localhost:5000/products/one?uid=${auth?.currentUser?.uid}&&purchaseId=${purchaseId}`,
@@ -20,6 +21,10 @@ const Purchase = () => {
       }
     ).then((res) => res.json())
   );
+
+  /*  set Default value  */
+
+  const [orderQtyField, setOrderQtyField] = useState(0);
   if (isLoading) return <Loader />;
 
   const {
@@ -88,6 +93,7 @@ const Purchase = () => {
   /* Validate Order quantity */
 
   const handleOrderQty = (event) => {
+    setOrderQtyField(event.target.value);
     const value = Number(event.target.value);
     const orderQtyValue = Number(orderQty);
     const totalStock = Number(availableQty);
@@ -182,7 +188,7 @@ const Purchase = () => {
                   name="orderQty"
                   id="orderQty"
                   onChange={handleOrderQty}
-                  defaultValue={orderQty}
+                  value={orderQtyField || orderQty}
                 />
                 {error && <small className="text-error">{error}</small>}
               </div>
