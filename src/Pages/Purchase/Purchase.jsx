@@ -27,7 +27,7 @@ const Purchase = () => {
           <div>
             <div className="flex items-center gap-2">
               <MdArrowBackIos
-                onClick={() => navigate(-1)}
+                onClick={() => navigate("/")}
                 className="cursor-pointer"
               />
               <h3 className="text-2xl">{purchaseProduct?.productName}</h3>
