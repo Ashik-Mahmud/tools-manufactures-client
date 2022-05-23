@@ -1,9 +1,16 @@
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import React from "react";
 import { MdArrowBackIos } from "react-icons/md";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
+import CheckoutForm from "./CheckoutForm";
+const stripePromise = loadStripe(
+  "pk_test_51L1TGlIFKTQHETSiTvzqn7XB7QHqL6Gxa3GbqnLZvO1wVtSFdMdEZdEvVY5KhbRUvhyUeBYgvhFIjSKtWg808bal00uf2cj4Hg"
+);
+
 const Payment = () => {
   const { paymentId } = useParams();
   const navigate = useNavigate();
@@ -54,11 +61,9 @@ const Payment = () => {
             </li>
           </ul>
           <div className="payment-option">
-            <button className="btn btn-primary">
-              Pay $
-              {Number(singleOrder?.productInfo?.orderQty) *
-                Number(singleOrder?.productInfo?.price)}
-            </button>
+            <Elements stripe={stripePromise}>
+              <CheckoutForm singleOrder={singleOrder} />
+            </Elements>
           </div>
         </div>
       </div>

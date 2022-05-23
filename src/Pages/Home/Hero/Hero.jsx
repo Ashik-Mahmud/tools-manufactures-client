@@ -29,7 +29,9 @@ const Hero = () => {
               Countries around the world and give them satisfied customers. If
               you need any tools you will contact us.
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <a href="#tools" className="btn btn-primary">
+              Get Started
+            </a>
           </div>
         </div>
       </div>
