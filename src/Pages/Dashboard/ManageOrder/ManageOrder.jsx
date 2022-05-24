@@ -1,37 +1,66 @@
 import React from "react";
+import { useQuery } from "react-query";
+import auth from "../../../Firebase/Firebase.config";
+import Loader from "./../../../Components/Loader/Loader";
 import OrderMangeRow from "./OrderMangeRow";
-
 const ManageOrder = () => {
+  const { data, isLoading } = useQuery("orders", () =>
+    fetch(`http://localhost:5000/orders/all?uid=${auth?.currentUser?.uid}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
+  );
+
+  if (isLoading) return <Loader />;
+  const orderData = data?.result;
+
   return (
     <div className="p-4">
-      <div className="title my-4">
-        <h3 className="text-2xl font-semibold">Manage Orders</h3>
-        <span>you can manage all the orders from here</span>
+      <div className="title my-4 flex items-center justify-between">
+        <div>
+          <h3 className="text-2xl font-semibold">Manage Orders</h3>
+          <span>you can manage all the orders from here</span>
+        </div>
+        <select className="select select-bordered ">
+          <option>Select Option</option>
+          <option>Pending</option>
+          <option>Unpaid</option>
+          <option>Shipped</option>
+        </select>
       </div>
       <div className="overflow-x-auto">
-        <table className="table w-full">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total Price</th>
-              <th>Product Image</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <OrderMangeRow />
-            <OrderMangeRow />
-            <OrderMangeRow />
-            <OrderMangeRow />
-          </tbody>
-        </table>
+        {orderData.length > 0 ? (
+          <table className="table w-full">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Product Image</th>
+                <th>Status</th>
+                <th>Shipped</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orderData.map((order) => (
+                <OrderMangeRow key={order._id} {...order} />
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <>
+            <div className="py-10 text-center">
+              <h3 className="text-3xl font-semibold">No Order Placed yet.</h3>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

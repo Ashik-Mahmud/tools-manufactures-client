@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
 import OrderRow from "./OrderRow";
@@ -34,6 +35,7 @@ const MyOrders = () => {
                 <th>Phone</th>
                 <th>TransactionID</th>
                 <th>Status</th>
+                <th>Situation</th>
                 <th>Pay</th>
                 <th>Delete</th>
               </tr>
@@ -59,6 +61,9 @@ const MyOrders = () => {
               <h2 className="text-2xl py-3 font-semibold text-center">
                 Not Order Placed yet.
               </h2>
+              <Link to="/shops" className="btn btn-primary">
+                Make Order
+              </Link>
             </div>
           </>
         )}

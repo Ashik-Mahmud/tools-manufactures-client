@@ -72,7 +72,9 @@ const PaymentHistory = () => {
                   src="https://assets.materialup.com/uploads/c49f60e7-655f-4ddd-bf29-7e702828d651/preview.png"
                   alt="order-detail"
                 />
-                <h3 className="text-2xl font-semibold">No Order found yet.</h3>
+                <h3 className="text-2xl font-semibold">
+                  No Payment found yet.
+                </h3>
               </div>
             </>
           )

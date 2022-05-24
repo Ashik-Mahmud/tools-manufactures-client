@@ -66,6 +66,9 @@ const OrderRow = ({
         <small>{transactionId ? transactionId : "Not Available yet."}</small>
       </td>
       <td>
+        <button className="btn btn-xs btn-error">Processing</button>
+      </td>
+      <td>
         {paid ? (
           <button className="btn btn-success btn-sm">PAID</button>
         ) : (
