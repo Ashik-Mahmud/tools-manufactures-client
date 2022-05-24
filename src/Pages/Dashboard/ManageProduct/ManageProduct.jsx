@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useQuery } from "react-query";
 import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
@@ -14,6 +15,33 @@ const ManageProduct = () => {
   );
 
   const productData = data?.result;
+
+  /* Handle Update Stock Product */
+  const [stock, setStock] = useState("");
+
+  const handleUpdateStock = async (event) => {
+    event.preventDefault();
+    await fetch(
+      `http://localhost:5000/products/update-stock?uid=${auth?.currentUser?.uid}`,
+      {
+        method: "PATCH",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ productId: modalProduct?._id, stock }),
+      }
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.success) {
+          toast.success(result?.message);
+          refetch();
+          setModalProduct(null);
+          setStock("");
+        }
+      });
+  };
 
   return (
     <div className="p-4">
@@ -68,7 +96,7 @@ const ManageProduct = () => {
               </label>
               <h3 className="text-lg font-bold">{modalProduct?.productName}</h3>
               <p>Here you can update this product stock as admin</p>
-              <form action="" className="my-2">
+              <form onSubmit={handleUpdateStock} action="" className="my-2">
                 <div className="my-4">
                   <label htmlFor="stock">Update Available Quantity</label>
                   <input
@@ -76,10 +104,13 @@ const ManageProduct = () => {
                     placeholder="Put Your Quantity"
                     className="input input-bordered w-full my-3"
                     id="stock"
+                    value={stock}
+                    onChange={(event) => setStock(event.target.value)}
+                    required
                   />
                 </div>
                 <div className="text-right">
-                  <button className="btn ">Update Stock</button>
+                  <button className="btn">Update Stock</button>
                 </div>
               </form>
             </div>

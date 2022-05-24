@@ -65,6 +65,7 @@ const ProductRow = ({
       </td>
       <td>
         <label
+          type="button"
           htmlFor="my-modal-3"
           className="btn btn-sm btn-success modal-button"
           onClick={() => setModalProduct({ _id, productName })}
