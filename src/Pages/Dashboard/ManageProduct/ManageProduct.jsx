@@ -6,15 +6,21 @@ import auth from "../../../Firebase/Firebase.config";
 import ProductRow from "./ProductRow";
 const ManageProduct = () => {
   const [modalProduct, setModalProduct] = useState({});
-  const { data, isLoading, refetch } = useQuery("products", () =>
-    fetch(`http://localhost:5000/products?uid=${auth?.currentUser?.uid}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
+  const [pageCount, setPageCount] = useState(0);
+  const { data, isLoading, refetch } = useQuery(["products", pageCount], () =>
+    fetch(
+      `http://localhost:5000/products?uid=${auth?.currentUser?.uid}&&page=${pageCount}&&limit=6`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => res.json())
   );
 
   const productData = data?.result;
+
+  const pageNumber = Math.ceil(data?.count / 6);
 
   /* Handle Update Stock Product */
   const [stock, setStock] = useState("");
@@ -53,32 +59,47 @@ const ManageProduct = () => {
         {isLoading ? (
           <Loader />
         ) : productData.length > 0 ? (
-          <table className="table w-full">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Creator</th>
-                <th>Available Quantity</th>
-                <th>Maximum Order Quantity</th>
-                <th>Price</th>
-                <th>Image</th>
-                <th>Stock Manage</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {productData.map((product, ind) => (
-                <ProductRow
-                  key={product._id}
-                  {...product}
-                  serialize={ind}
-                  refetch={refetch}
-                  setModalProduct={setModalProduct}
-                />
+          <>
+            <table className="table w-full">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Creator</th>
+                  <th>Available Quantity</th>
+                  <th>Maximum Order Quantity</th>
+                  <th>Price</th>
+                  <th>Image</th>
+                  <th>Stock Manage</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {productData.map((product, ind) => (
+                  <ProductRow
+                    key={product._id}
+                    {...product}
+                    serialize={ind}
+                    refetch={refetch}
+                    setModalProduct={setModalProduct}
+                  />
+                ))}
+              </tbody>
+            </table>
+            <div className="btn-group flex justify-end my-3 items-center">
+              {[...Array(pageNumber).keys()].map((page) => (
+                <button
+                  onClick={() => setPageCount(page)}
+                  className={`btn btn-primary ${
+                    page === pageCount ? "" : "btn-outline"
+                  }`}
+                  key={page}
+                >
+                  {page + 1}
+                </button>
               ))}
-            </tbody>
-          </table>
+            </div>
+          </>
         ) : (
           "No product available yet."
         )}
