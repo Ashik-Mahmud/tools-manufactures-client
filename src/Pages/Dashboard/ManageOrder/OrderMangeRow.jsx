@@ -1,5 +1,7 @@
 import React from "react";
 import { RiDeleteBack2Line } from "react-icons/ri";
+import Swal from "sweetalert2";
+import auth from "../../../Firebase/Firebase.config";
 
 const OrderMangeRow = ({
   author,
@@ -7,11 +9,42 @@ const OrderMangeRow = ({
   address,
   paid,
   transactionId,
+  refetch,
   _id,
 }) => {
   /* Handle Shipped Order */
   const handleShipped = async (id) => {
-    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Shipped it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(
+          `http://localhost:5000/orders/shipped?uid=${auth?.currentUser?.uid}&&shippedId=${id}`,
+          {
+            method: "PATCH",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              "content-type": "application/json",
+            },
+            body: JSON.string({ shipped: true }),
+          }
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            console.log(result);
+            if (result.success) {
+              refetch();
+              Swal.fire("Yeah!", "Your Product is shipped.", "success");
+            }
+          });
+      }
+    });
   };
 
   return (
