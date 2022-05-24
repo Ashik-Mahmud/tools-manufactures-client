@@ -4,7 +4,15 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import auth from "../../../Firebase/Firebase.config";
 
-const OrderRow = ({ productInfo, address, serialize, _id, refetch }) => {
+const OrderRow = ({
+  productInfo,
+  address,
+  serialize,
+  _id,
+  refetch,
+  paid,
+  transactionId,
+}) => {
   const navigate = useNavigate();
   const { productName, price, orderQty, image } = productInfo;
   /* Handle Delete Order */
@@ -55,21 +63,27 @@ const OrderRow = ({ productInfo, address, serialize, _id, refetch }) => {
       <td>{address?.address}</td>
       <td>{address?.phone}</td>
       <td>
-        <small>Not Available yet.</small>
+        <small>{transactionId ? transactionId : "Not Available yet."}</small>
       </td>
       <td>
-        <button className="btn btn-accent btn-sm">UNPAID</button>
+        {paid ? (
+          <button className="btn btn-success btn-sm">PAID</button>
+        ) : (
+          <button className="btn btn-accent btn-sm">UNPAID</button>
+        )}
       </td>
       <td>
         <button
+          disabled={paid && true}
           onClick={() => navigate(`/dashboard/payment/${_id}`)}
           className="btn-sm btn btn-primary"
         >
-          Pay {Number(price) * Number(orderQty)}$
+          {paid ? "Paid" : "Pay"} {Number(price) * Number(orderQty)}$
         </button>
       </td>
       <td>
         <button
+          disabled={paid && true}
           onClick={() => deleteOrder(_id)}
           className="btn btn-error btn-sm"
         >

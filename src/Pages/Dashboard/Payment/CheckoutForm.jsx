@@ -99,7 +99,6 @@ const CheckoutForm = ({ singleOrder }) => {
         })
           .then((res) => res.json())
           .then((result) => {
-            console.log(result);
             if (result.success) {
               navigate(`/dashboard/my-orders`);
             }
