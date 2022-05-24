@@ -1,4 +1,5 @@
 import React from "react";
+import { BsCalendarDate } from "react-icons/bs";
 import { RiDeleteBack2Line } from "react-icons/ri";
 import Swal from "sweetalert2";
 import auth from "../../../Firebase/Firebase.config";
@@ -10,6 +11,7 @@ const OrderMangeRow = ({
   paid,
   transactionId,
   refetch,
+  createdAt,
   _id,
   shipped,
 }) => {
@@ -51,6 +53,9 @@ const OrderMangeRow = ({
   return (
     <tr>
       <th>1</th>
+      <td title={createdAt}>
+        <BsCalendarDate className="cursor-pointer" />
+      </td>
       <td>{author?.name}</td>
       <td>{author?.email}</td>
       <td>{address?.phone}</td>

@@ -36,6 +36,7 @@ const ManageOrder = () => {
             <thead>
               <tr>
                 <th></th>
+                <th>Date</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -43,7 +44,7 @@ const ManageOrder = () => {
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total Price</th>
-                <th>Product Image</th>
+                <th>Image</th>
                 <th>Status</th>
                 <th>Shipped</th>
                 <th>Action</th>
