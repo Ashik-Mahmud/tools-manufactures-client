@@ -25,13 +25,8 @@ const Payment = () => {
       }
     ).then((res) => res.json())
   );
-  useTitle(
-    data.result.find((order) => order._id === paymentId).productInfo
-      ?.productName
-  );
-
+  useTitle("Payment Option");
   if (isLoading) return <Loader />;
-
   const singleOrder = data.result.find((order) => order._id === paymentId);
 
   return (
