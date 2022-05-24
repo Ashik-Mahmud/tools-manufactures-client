@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Fade from "react-reveal/Fade";
 import Slider from "react-slick";
 import Loader from "../../../Components/Loader/Loader";
 import TItle from "../../../Components/TItle/TItle";
@@ -50,17 +51,19 @@ const Reviews = () => {
           title="Testimonial by Customer"
           subTitle="What Customer say about us?"
         />
-        {loading ? (
-          <div className="reviews-content">
-            <Slider {...settings}>
-              {reviews.map((review) => (
-                <CardReview key={review._id} {...review} />
-              ))}
-            </Slider>
-          </div>
-        ) : (
-          <Loader />
-        )}
+        <Fade bottom distance="30px">
+          {loading ? (
+            <div className="reviews-content">
+              <Slider {...settings}>
+                {reviews.map((review) => (
+                  <CardReview key={review._id} {...review} />
+                ))}
+              </Slider>
+            </div>
+          ) : (
+            <Loader />
+          )}
+        </Fade>
       </div>
     </section>
   );

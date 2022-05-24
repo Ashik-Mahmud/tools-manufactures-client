@@ -127,7 +127,7 @@ const Purchase = () => {
             />
             <ul className="flex flex-wrap items-center gap-3">
               <li>
-                Maximum Order Quantity -<strong>{orderQty}pcs</strong>
+                Minimum Order Quantity -<strong>{orderQty}pcs</strong>
               </li>
               <li>
                 Available Quantity -<strong>{availableQty}pcs</strong>

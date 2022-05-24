@@ -1,5 +1,6 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
+import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 import CardBlog from "./CardBlog";
 const Blogs = () => {
@@ -32,14 +33,16 @@ const Blogs = () => {
         </div>
       </div>
       <div className="container mx-auto py-10">
-        <div className="blogs-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
-          <CardBlog />
-          <CardBlog />
-          <CardBlog />
-          <CardBlog />
-          <CardBlog />
-          <CardBlog />
-        </div>
+        <Fade bottom distance="30px">
+          <div className="blogs-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
+            <CardBlog />
+            <CardBlog />
+            <CardBlog />
+            <CardBlog />
+            <CardBlog />
+            <CardBlog />
+          </div>
+        </Fade>
       </div>
     </section>
   );

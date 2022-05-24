@@ -1,4 +1,5 @@
 import React from "react";
+import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 import Loader from "../../../Components/Loader/Loader";
 import TItle from "../../../Components/TItle/TItle";
@@ -18,16 +19,17 @@ const Tools = () => {
             Get All the products
           </Link>
         </div>
-
-        {loading ? (
-          <div className="tools-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-6">
-            {products?.slice(0, 4)?.map((product) => (
-              <CardTool key={product._id} {...product} />
-            ))}
-          </div>
-        ) : (
-          <Loader />
-        )}
+        <Fade bottom distance="30px">
+          {loading ? (
+            <div className="tools-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-6">
+              {products?.slice(0, 4)?.map((product) => (
+                <CardTool key={product._id} {...product} />
+              ))}
+            </div>
+          ) : (
+            <Loader />
+          )}
+        </Fade>
       </div>
     </section>
   );

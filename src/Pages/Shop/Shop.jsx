@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { BsSearch } from "react-icons/bs";
+import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 import Loader from "../../Components/Loader/Loader";
 import useProduct from "../../Hooks/useProduct";
 import CardTool from "../Home/Tools/CardTool";
-
 const Shop = () => {
   const [products, loading, setProducts] = useProduct();
   /* Handle Search Option */
@@ -52,17 +52,23 @@ const Shop = () => {
           </form>
         </div>
       </div>
-      <div className="container mx-auto py-20 px-6">
-        {loading || searchLoading ? (
-          <div className="shop-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.map((product) => (
-              <CardTool key={product._id} {...product} />
-            ))}
-          </div>
-        ) : (
-          <Loader />
-        )}
-      </div>
+      <Fade bottom distance="30px">
+        <div className="container mx-auto py-20 px-6">
+          {loading || searchLoading ? (
+            products.length > 0 ? (
+              <div className="shop-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {products.map((product) => (
+                  <CardTool key={product._id} {...product} />
+                ))}
+              </div>
+            ) : (
+              "No Product found."
+            )
+          ) : (
+            <Loader />
+          )}
+        </div>
+      </Fade>
     </section>
   );
 };
