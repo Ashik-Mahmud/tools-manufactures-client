@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
 import ProductRow from "./ProductRow";
 const ManageProduct = () => {
+  const [modalProduct, setModalProduct] = useState({});
   const { data, isLoading, refetch } = useQuery("products", () =>
     fetch(`http://localhost:5000/products?uid=${auth?.currentUser?.uid}`, {
       headers: {
@@ -34,6 +35,7 @@ const ManageProduct = () => {
                 <th>Maximum Order Quantity</th>
                 <th>Price</th>
                 <th>Image</th>
+                <th>Stock Manage</th>
                 <th>Delete</th>
               </tr>
             </thead>
@@ -44,6 +46,7 @@ const ManageProduct = () => {
                   {...product}
                   serialize={ind}
                   refetch={refetch}
+                  setModalProduct={setModalProduct}
                 />
               ))}
             </tbody>
@@ -52,6 +55,37 @@ const ManageProduct = () => {
           "No product available yet."
         )}
       </div>
+      {modalProduct && (
+        <>
+          <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+          <div className="modal">
+            <div className="modal-box relative">
+              <label
+                htmlFor="my-modal-3"
+                className="btn btn-sm btn-circle absolute right-2 top-2"
+              >
+                ✕
+              </label>
+              <h3 className="text-lg font-bold">{modalProduct?.productName}</h3>
+              <p>Here you can update this product stock as admin</p>
+              <form action="" className="my-2">
+                <div className="my-4">
+                  <label htmlFor="stock">Update Available Quantity</label>
+                  <input
+                    type="number"
+                    placeholder="Put Your Quantity"
+                    className="input input-bordered w-full my-3"
+                    id="stock"
+                  />
+                </div>
+                <div className="text-right">
+                  <button className="btn ">Update Stock</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

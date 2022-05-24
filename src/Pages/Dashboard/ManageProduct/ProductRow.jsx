@@ -13,6 +13,7 @@ const ProductRow = ({
   _id,
   refetch,
   creator,
+  setModalProduct,
 }) => {
   /* Handle Product Delete */
   const handleProductDelete = async (id) => {
@@ -61,6 +62,15 @@ const ProductRow = ({
           width={60}
           className="rounded shadow-sm bg-base-300 border p-1"
         />
+      </td>
+      <td>
+        <label
+          htmlFor="my-modal-3"
+          className="btn btn-sm btn-success modal-button"
+          onClick={() => setModalProduct({ _id, productName })}
+        >
+          Stock
+        </label>
       </td>
       <td>
         <button
