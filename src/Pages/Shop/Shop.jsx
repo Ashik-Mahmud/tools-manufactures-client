@@ -17,7 +17,6 @@ const Shop = () => {
     await fetch(`http://localhost:5000/products/search?q=${searchText}`)
       .then((res) => res.json())
       .then((result) => {
-        console.log(result?.searchedResult);
         setProducts(result?.searchedResult);
         setSearchLoading(true);
       });
@@ -26,7 +25,7 @@ const Shop = () => {
   return (
     <section id="shops">
       <div className="breadcrumb text-center py-20 bg-base-200">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-3">
           <h2 className="text-3xl">Shop Page</h2>
           <div className="text-md breadcrumbs ">
             <ul className="justify-center">
@@ -39,7 +38,7 @@ const Shop = () => {
           <form
             onSubmit={HandleSearchProduct}
             action=""
-            className="search flex items-stretch p-2 bg-base-100 rounded-md w-full md:w-5/12 mx-auto my-2"
+            className="search flex items-stretch p-2 px-4 bg-base-100 rounded-md w-full md:w-5/12 mx-auto my-2"
           >
             <input
               type="search"
@@ -53,7 +52,7 @@ const Shop = () => {
           </form>
         </div>
       </div>
-      <div className="container mx-auto py-20">
+      <div className="container mx-auto py-20 px-6">
         {loading || searchLoading ? (
           <div className="shop-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {products.map((product) => (
