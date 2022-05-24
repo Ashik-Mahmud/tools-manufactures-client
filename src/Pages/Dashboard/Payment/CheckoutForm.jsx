@@ -1,9 +1,34 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+import auth from "../../../Firebase/Firebase.config";
 const CheckoutForm = ({ singleOrder }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const [clientSecret, setClientSecret] = useState("");
+  /* Create Payment Intent */
+  const totalPrice =
+    Number(singleOrder?.productInfo?.orderQty) *
+    Number(singleOrder?.productInfo?.price);
+  useEffect(() => {
+    fetch(
+      `http://localhost:5000/payment/create-payment-intent?uid=${auth?.currentUser?.uid}`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ price: totalPrice }),
+      }
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        if (result?.clientSecret) {
+          setClientSecret(result.clientSecret);
+        }
+      });
+  }, [totalPrice]);
 
   const handleSubmit = async (event) => {
     // Block native form submission.
@@ -19,15 +44,53 @@ const CheckoutForm = ({ singleOrder }) => {
     }
 
     // Use your card Element with other Stripe.js APIs
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
-
     if (error) {
-      console.log("[error]", error);
+      return toast.error(error?.message);
+    }
+    /* Confirm Payment */
+    const { paymentIntent, error: intentError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: singleOrder?.author?.name,
+            email: singleOrder?.author?.email,
+          },
+        },
+      });
+
+    if (intentError) {
+      return toast.error(intentError?.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      toast.success(
+        `Congrats!! Payment successfully done. Here is your TransactionID ${paymentIntent?.id}`
+      );
+      if (paymentIntent?.status === "succeeded") {
+        const data = {
+          author: {
+            name: singleOrder?.author?.name,
+            uid: auth?.currentUser?.uid,
+          },
+          transactionId: paymentIntent?.id,
+          status: paymentIntent?.status,
+        };
+        fetch(`http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`, {
+          method: "PATCH",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            console.log(result);
+          });
+      }
     }
   };
 
@@ -54,10 +117,7 @@ const CheckoutForm = ({ singleOrder }) => {
         className="btn btn-primary my-8 w-full"
         disabled={!stripe}
       >
-        Pay{" "}
-        {Number(singleOrder?.productInfo?.orderQty) *
-          Number(singleOrder?.productInfo?.price)}{" "}
-        $
+        Pay {totalPrice} $
       </button>
     </form>
   );
