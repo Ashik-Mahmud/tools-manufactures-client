@@ -51,9 +51,15 @@ const MyOrders = () => {
           </table>
         ) : (
           <>
-            <h2 className="text-2xl py-3 font-semibold text-center">
-              Not Order Placed yet.
-            </h2>
+            <div className="grid place-items-center py-10">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyS0g4KI9aJhPYuJLsGMoKRd603nvd0Ia9YxxJ8kKw93PUkrhNx6LuIIQXM05YKdIL7Zc&usqp=CAU"
+                alt="order-not-found"
+              />
+              <h2 className="text-2xl py-3 font-semibold text-center">
+                Not Order Placed yet.
+              </h2>
+            </div>
           </>
         )}
       </div>
