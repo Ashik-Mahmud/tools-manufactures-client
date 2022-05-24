@@ -16,6 +16,7 @@ import ManageProduct from "./Pages/Dashboard/ManageProduct/ManageProduct";
 import MyOrders from "./Pages/Dashboard/MyOrders/MyOrders";
 import Overview from "./Pages/Dashboard/Overview/Overview";
 import Payment from "./Pages/Dashboard/Payment/Payment";
+import PaymentHistory from "./Pages/Dashboard/PaymentHistory/PaymentHistory";
 import Profile from "./Pages/Dashboard/Profile/Profile";
 import Home from "./Pages/Home/Home/Home";
 import Login from "./Pages/Login/Login/Login";
@@ -55,6 +56,7 @@ function App() {
               <Route path="manage-product" element={<RequireAdmin><ManageProduct /></RequireAdmin>} />
               <Route path="manage-order" element={<RequireAdmin><ManageOrder /></RequireAdmin>} /> 
               <Route path="my-orders" element={<RequireUser><MyOrders /></RequireUser>} /> 
+              <Route path="payment-history" element={<RequireUser><PaymentHistory /></RequireUser>} /> 
               <Route path="payment/:paymentId" element={<Payment />} />
               <Route path="profile" element={<Profile />} /> 
               <Route path="add-review" element={<RequireUser><AddReview /></RequireUser>} /> 
