@@ -90,8 +90,8 @@ const ManageProduct = () => {
               {[...Array(pageNumber).keys()].map((page) => (
                 <button
                   onClick={() => setPageCount(page)}
-                  className={`btn btn-primary ${
-                    page === pageCount ? "" : "btn-outline"
+                  className={`btn  btn-sm btn-outline ${
+                    page === pageCount && "btn-active"
                   }`}
                   key={page}
                 >
