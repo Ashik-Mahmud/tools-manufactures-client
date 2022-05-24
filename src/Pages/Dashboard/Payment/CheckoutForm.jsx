@@ -1,11 +1,13 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.config";
 const CheckoutForm = ({ singleOrder }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
+  const navigate = useNavigate();
   /* Create Payment Intent */
   const totalPrice =
     Number(singleOrder?.productInfo?.orderQty) *
@@ -73,10 +75,19 @@ const CheckoutForm = ({ singleOrder }) => {
         const data = {
           author: {
             name: singleOrder?.author?.name,
+            email: auth?.currentUser.email,
             uid: auth?.currentUser?.uid,
+          },
+          productInfo: {
+            name: singleOrder?.productInfo?.productName,
+            price: singleOrder?.productInfo?.price,
+            orderQty: singleOrder?.productInfo?.orderQty,
+            image: singleOrder?.productInfo?.image,
           },
           transactionId: paymentIntent?.id,
           status: paymentIntent?.status,
+          createdAt:
+            new Date().toDateString() + " " + new Date().toLocaleTimeString(),
         };
         fetch(`http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`, {
           method: "PATCH",
@@ -89,6 +100,9 @@ const CheckoutForm = ({ singleOrder }) => {
           .then((res) => res.json())
           .then((result) => {
             console.log(result);
+            if (result.success) {
+              navigate(`/dashboard/my-orders`);
+            }
           });
       }
     }
