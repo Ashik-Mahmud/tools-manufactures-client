@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import ReactStars from "react-stars";
 import auth from "../../../Firebase/Firebase.config";
+import useTitle from "../../../Hooks/useTitle";
 const AddReview = () => {
+  useTitle("Add Review");
   const [rating, setRating] = useState(0);
 
   /* Handle Add Review */
@@ -21,7 +23,7 @@ const AddReview = () => {
     };
     if (rating && reviewText) {
       await fetch(
-        `http://localhost:5000/reviews?uid=${auth?.currentUser?.uid}`,
+        `https://tools-manufactures.herokuapp.com/reviews?uid=${auth?.currentUser?.uid}`,
         {
           method: "POST",
           headers: {

@@ -5,8 +5,10 @@ import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 import Loader from "../../Components/Loader/Loader";
 import useProduct from "../../Hooks/useProduct";
+import useTitle from "../../Hooks/useTitle";
 import CardTool from "../Home/Tools/CardTool";
 const Shop = () => {
+  useTitle("shops");
   const [products, loading, setProducts] = useProduct();
   /* Handle Search Option */
   const [searchLoading, setSearchLoading] = useState(false);
@@ -14,7 +16,9 @@ const Shop = () => {
     event.preventDefault();
     const searchText = event.target.search.value;
     if (!searchText) return toast.error(`Search field is required.`);
-    await fetch(`http://localhost:5000/products/search?q=${searchText}`)
+    await fetch(
+      `https://tools-manufactures.herokuapp.com/products/search?q=${searchText}`
+    )
       .then((res) => res.json())
       .then((result) => {
         setProducts(result?.searchedResult);

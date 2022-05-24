@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../Components/Loader/Loader";
 import auth from "../../Firebase/Firebase.config";
+import useTitle from "../../Hooks/useTitle";
 const Purchase = () => {
   const [error, setError] = useState("");
   const formRef = useRef(null);
@@ -13,7 +14,7 @@ const Purchase = () => {
 
   const { data, isLoading } = useQuery("products", () =>
     fetch(
-      `http://localhost:5000/products/one?uid=${auth?.currentUser?.uid}&&purchaseId=${purchaseId}`,
+      `https://tools-manufactures.herokuapp.com/products/one?uid=${auth?.currentUser?.uid}&&purchaseId=${purchaseId}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -25,6 +26,7 @@ const Purchase = () => {
   /*  set Default value  */
 
   const [orderQtyField, setOrderQtyField] = useState(0);
+  useTitle(data?.result.productName);
   if (isLoading) return <Loader />;
 
   const {
@@ -73,14 +75,17 @@ const Purchase = () => {
 
   /* Send Order data into Server */
   const sendOrderData = async (data) => {
-    await fetch(`http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`, {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    await fetch(
+      `https://tools-manufactures.herokuapp.com/orders?uid=${auth?.currentUser?.uid}`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result.success) {

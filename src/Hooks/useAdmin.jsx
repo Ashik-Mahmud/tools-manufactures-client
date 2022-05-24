@@ -6,11 +6,14 @@ const useAdmin = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {
-      await fetch(`http://localhost:5000/admin?uid=${auth?.currentUser?.uid}`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      await fetch(
+        `https://tools-manufactures.herokuapp.com/admin?uid=${auth?.currentUser?.uid}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((result) => {
           setIsAdmin(result.isAdmin);

@@ -5,7 +5,7 @@ const useToken = (user) => {
   useEffect(() => {
     if (user) {
       (async () => {
-        await fetch(`http://localhost:5000/login`, {
+        await fetch(`https://tools-manufactures.herokuapp.com/login`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ uid: user?.uid, email: user?.email }),

@@ -3,8 +3,10 @@ import toast from "react-hot-toast";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { useQuery } from "react-query";
 import auth from "../../../Firebase/Firebase.config";
+import useTitle from "../../../Hooks/useTitle";
 import Loader from "./../../../Components/Loader/Loader";
 const Profile = () => {
+  useTitle("Profile");
   const [isShow, setIsShow] = useState(false);
   /*  Handle Update Profile  */
   const handleUpdateProfile = async (event) => {
@@ -15,14 +17,17 @@ const Profile = () => {
     const linkedin = event.target.linkedin.value;
     const facebook = event.target.facebook.value;
     const data = { education, number, address, linkedin, facebook };
-    await fetch(`http://localhost:5000/users?uid=${auth?.currentUser?.uid}`, {
-      method: "PATCH",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    await fetch(
+      `https://tools-manufactures.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
+      {
+        method: "PATCH",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result?.success) {
@@ -39,11 +44,14 @@ const Profile = () => {
     isLoading,
     refetch,
   } = useQuery(["profileData", auth?.currentUser?.uid], () =>
-    fetch(`http://localhost:5000/users?uid=${auth?.currentUser?.uid}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://tools-manufactures.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => res.json())
   );
   if (isLoading)
     return (

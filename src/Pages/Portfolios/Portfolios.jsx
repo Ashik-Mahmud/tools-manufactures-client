@@ -22,7 +22,9 @@ import {
   SiReactrouter,
   SiTailwindcss,
 } from "react-icons/si";
+import useTitle from "../../Hooks/useTitle";
 const Portfolios = () => {
+  useTitle("Portfolios");
   return (
     <section>
       <section className="text-gray-600 body-font">

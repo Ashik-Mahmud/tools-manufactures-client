@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
+import useTitle from "../../../Hooks/useTitle";
 
 const PaymentHistory = () => {
+  useTitle("Payment History");
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     fetch(
-      `http://localhost:5000/payment/history?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.herokuapp.com/payment/history?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

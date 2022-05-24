@@ -2,14 +2,19 @@ import React from "react";
 import { useQuery } from "react-query";
 import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
+import useTitle from "../../../Hooks/useTitle";
 import AdminRow from "./AdminRow";
 const MakeAdmin = () => {
+  useTitle("Make Admin");
   const { data, isLoading, refetch } = useQuery("Users", () =>
-    fetch(`http://localhost:5000/users/all?uid=${auth?.currentUser.uid}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://tools-manufactures.herokuapp.com/users/all?uid=${auth?.currentUser.uid}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => res.json())
   );
 
   const usersData = data?.result;

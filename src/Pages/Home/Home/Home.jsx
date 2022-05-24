@@ -1,4 +1,5 @@
 import React from "react";
+import useTitle from "../../../Hooks/useTitle";
 import Company from "../Company/Company";
 import GetInTouch from "../GetInTouch/GetInTouch";
 import Hero from "../Hero/Hero";
@@ -9,6 +10,7 @@ import Teams from "../Teams/Teams";
 import Tools from "../Tools/Tools";
 
 const Home = () => {
+  useTitle("Home page");
   return (
     <section>
       <Hero />

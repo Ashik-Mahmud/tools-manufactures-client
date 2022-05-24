@@ -29,7 +29,7 @@ const OrderRow = ({
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `http://localhost:5000/orders?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
+          `https://tools-manufactures.herokuapp.com/orders?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
           {
             method: "DELETE",
             headers: {

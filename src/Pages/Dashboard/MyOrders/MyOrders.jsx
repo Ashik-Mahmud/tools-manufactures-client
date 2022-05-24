@@ -3,14 +3,19 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
+import useTitle from "../../../Hooks/useTitle";
 import OrderRow from "./OrderRow";
 const MyOrders = () => {
+  useTitle("Manage Orders");
   const { data, isLoading, refetch } = useQuery("Orders", () =>
-    fetch(`http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://tools-manufactures.herokuapp.com/orders?uid=${auth?.currentUser?.uid}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => res.json())
   );
 
   if (isLoading) return <Loader />;

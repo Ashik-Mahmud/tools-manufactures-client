@@ -1,6 +1,8 @@
 import React from "react";
+import useTitle from "../../../Hooks/useTitle";
 
 const Overview = () => {
+  useTitle("Dashboard");
   return (
     <div className="p-5 grid place-items-center min-h-[80vh]">
       <img

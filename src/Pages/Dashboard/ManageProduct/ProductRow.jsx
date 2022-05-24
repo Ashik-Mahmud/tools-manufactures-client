@@ -28,7 +28,7 @@ const ProductRow = ({
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `http://localhost:5000/products?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
+          `https://tools-manufactures.herokuapp.com/products?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
           {
             method: "DELETE",
             headers: {

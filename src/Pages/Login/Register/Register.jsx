@@ -4,10 +4,12 @@ import { toast } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/Firebase.config";
 import useFirebase from "../../../Hooks/useFirebase";
+import useTitle from "../../../Hooks/useTitle";
 import useToken from "../../../Hooks/useToken";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
+  useTitle("Register");
   /*  if user is loggedIn */
   const navigate = useNavigate();
   const location = useLocation();

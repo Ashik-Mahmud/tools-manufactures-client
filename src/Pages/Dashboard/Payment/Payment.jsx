@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
+import useTitle from "../../../Hooks/useTitle";
 import CheckoutForm from "./CheckoutForm";
 const stripePromise = loadStripe(
   "pk_test_51L1TGlIFKTQHETSiTvzqn7XB7QHqL6Gxa3GbqnLZvO1wVtSFdMdEZdEvVY5KhbRUvhyUeBYgvhFIjSKtWg808bal00uf2cj4Hg"
@@ -15,11 +16,18 @@ const Payment = () => {
   const { paymentId } = useParams();
   const navigate = useNavigate();
   const { data, isLoading } = useQuery("Orders", () =>
-    fetch(`http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://tools-manufactures.herokuapp.com/orders?uid=${auth?.currentUser?.uid}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => res.json())
+  );
+  useTitle(
+    data.result.find((order) => order._id === paymentId).productInfo
+      ?.productName
   );
 
   if (isLoading) return <Loader />;

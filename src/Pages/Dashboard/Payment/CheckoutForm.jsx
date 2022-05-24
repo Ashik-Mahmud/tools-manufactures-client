@@ -15,7 +15,7 @@ const CheckoutForm = ({ singleOrder }) => {
     Number(singleOrder?.productInfo?.price);
   useEffect(() => {
     fetch(
-      `http://localhost:5000/payment/create-payment-intent?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.herokuapp.com/payment/create-payment-intent?uid=${auth?.currentUser?.uid}`,
       {
         method: "POST",
         headers: {
@@ -88,7 +88,7 @@ const CheckoutForm = ({ singleOrder }) => {
             new Date().toDateString() + " " + new Date().toLocaleTimeString(),
         };
         fetch(
-          `http://localhost:5000/orders?uid=${auth?.currentUser?.uid}&&orderId=${singleOrder?._id}`,
+          `https://tools-manufactures.herokuapp.com/orders?uid=${auth?.currentUser?.uid}&&orderId=${singleOrder?._id}`,
           {
             method: "PATCH",
             headers: {
@@ -103,7 +103,7 @@ const CheckoutForm = ({ singleOrder }) => {
             if (result.success) {
               navigate(`/dashboard/my-orders`);
               fetch(
-                `http://localhost:5000/products?uid=${auth?.currentUser?.uid}&&productId=${singleOrder?.productInfo?.productId}`,
+                `https://tools-manufactures.herokuapp.com/products?uid=${auth?.currentUser?.uid}&&productId=${singleOrder?.productInfo?.productId}`,
                 {
                   method: "PATCH",
                   headers: {

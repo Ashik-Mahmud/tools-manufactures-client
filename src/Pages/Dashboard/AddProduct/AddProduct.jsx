@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import auth from "../../../Firebase/Firebase.config";
+import useTitle from "../../../Hooks/useTitle";
 const AddProduct = () => {
+  useTitle("Add Product");
   const upload_api_key = `e30b0e0fb6ea0d2a6ec59a91cf20ebbd`;
   const [isFile, setIsFile] = useState(false);
   const {
@@ -59,7 +61,7 @@ const AddProduct = () => {
     };
 
     await fetch(
-      `http://localhost:5000/products?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.herokuapp.com/products?uid=${auth?.currentUser?.uid}`,
       {
         method: "POST",
         headers: {

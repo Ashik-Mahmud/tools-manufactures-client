@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import useTitle from "../../Hooks/useTitle";
 
 const Contact = () => {
+  useTitle("Contact");
   /*  Handle Contact Form */
   const handleContactForm = (event) => {
     event.preventDefault();

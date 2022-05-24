@@ -3,13 +3,15 @@ import { toast } from "react-hot-toast";
 import { useQuery } from "react-query";
 import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
+import useTitle from "../../../Hooks/useTitle";
 import ProductRow from "./ProductRow";
 const ManageProduct = () => {
+  useTitle("Manage Product");
   const [modalProduct, setModalProduct] = useState({});
   const [pageCount, setPageCount] = useState(0);
   const { data, isLoading, refetch } = useQuery(["products", pageCount], () =>
     fetch(
-      `http://localhost:5000/products?uid=${auth?.currentUser?.uid}&&page=${pageCount}&&limit=6`,
+      `https://tools-manufactures.herokuapp.com/products?uid=${auth?.currentUser?.uid}&&page=${pageCount}&&limit=6`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -28,7 +30,7 @@ const ManageProduct = () => {
   const handleUpdateStock = async (event) => {
     event.preventDefault();
     await fetch(
-      `http://localhost:5000/products/update-stock?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.herokuapp.com/products/update-stock?uid=${auth?.currentUser?.uid}`,
       {
         method: "PATCH",
         headers: {

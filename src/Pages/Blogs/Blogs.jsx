@@ -2,8 +2,10 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
+import useTitle from "../../Hooks/useTitle";
 import CardBlog from "./CardBlog";
 const Blogs = () => {
+  useTitle("Blogs");
   return (
     <section className="blogs">
       <div className="breadcrumb text-center py-20 bg-base-200">
