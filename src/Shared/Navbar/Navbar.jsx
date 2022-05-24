@@ -25,7 +25,11 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-
+      <li>
+        <NavLink className="uppercase" to="/shops">
+          Shop
+        </NavLink>
+      </li>
       <li>
         <NavLink className="uppercase" to="/blogs">
           Blogs
