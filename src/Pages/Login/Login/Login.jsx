@@ -1,4 +1,7 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -31,6 +34,18 @@ const Login = () => {
         if (res) {
           toast.success(`Sign In successfully done.`);
         }
+      })
+      .catch((err) => toast.error(err.message.split(":")[1]));
+  };
+
+  /* Handle Reset Password  */
+  const handleResetPassword = async (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    await sendPasswordResetEmail(auth, email)
+      .then(() => {
+        toast.success(`We sent you email with password reset link.`);
+        event.target.reset();
       })
       .catch((err) => toast.error(err.message.split(":")[1]));
   };
@@ -81,9 +96,14 @@ const Login = () => {
               <button className="btn btn-primary px-20 rounded-full">
                 Login
               </button>
-              <Link to="/" className="text-sm">
-                Forgot Password?
-              </Link>
+              <label
+                type="button"
+                htmlFor="my-modal-4"
+                className="text-sm modal-button btn-link cursor-pointer text-slate-700"
+                onClick={() => {}}
+              >
+                Forgot password?
+              </label>
             </div>
             <SocialLogin />
             <p>
@@ -95,6 +115,35 @@ const Login = () => {
           </form>
         </div>
       </div>
+      <form onSubmit={handleResetPassword} action="" className="my-2">
+        <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box relative">
+            <label
+              htmlFor="my-modal-4"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+            >
+              ✕
+            </label>
+            <h3 className="text-lg font-bold">Reset Your Password</h3>
+            <p>Here you can reset your password via email</p>
+            <div className="my-4">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="input input-bordered w-full my-3"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div className="text-right">
+              <button className="btn">Reset Password</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </section>
   );
 };
