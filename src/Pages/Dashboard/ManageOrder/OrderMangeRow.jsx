@@ -11,6 +11,7 @@ const OrderMangeRow = ({
   transactionId,
   refetch,
   _id,
+  shipped,
 }) => {
   /* Handle Shipped Order */
   const handleShipped = async (id) => {
@@ -32,7 +33,7 @@ const OrderMangeRow = ({
               authorization: `Bearer ${localStorage.getItem("accessToken")}`,
               "content-type": "application/json",
             },
-            body: JSON.string({ shipped: true }),
+            body: JSON.stringify({ shipped: true }),
           }
         )
           .then((res) => res.json())
@@ -66,21 +67,25 @@ const OrderMangeRow = ({
         />
       </td>
       <td>
-        <button className={`${paid ? "btn-success" : "btn-error"} btn btn-xs`}>
-          {paid ? "Pending..." : "Unpaid"}
+        <button
+          className={`${
+            paid ? (shipped ? "btn-primary" : "btn-success") : "btn-error"
+          } btn btn-xs`}
+        >
+          {paid ? (shipped ? "Delivered" : "Pending...") : "Unpaid"}
         </button>
       </td>
       <td>
         <button
           onClick={() => handleShipped(_id)}
-          disabled={!paid && true}
+          disabled={!paid || (shipped && true)}
           className="btn-secondary btn btn-xs"
         >
           Shipped
         </button>
       </td>
       <td>
-        <button className="btn-error btn btn-xs">
+        <button disabled={shipped && true} className="btn-error btn btn-xs">
           <RiDeleteBack2Line />
         </button>
       </td>

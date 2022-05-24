@@ -12,6 +12,7 @@ const OrderRow = ({
   refetch,
   paid,
   transactionId,
+  shipped,
 }) => {
   const navigate = useNavigate();
   const { productName, price, orderQty, image } = productInfo;
@@ -66,7 +67,15 @@ const OrderRow = ({
         <small>{transactionId ? transactionId : "Not Available yet."}</small>
       </td>
       <td>
-        <button className="btn btn-xs btn-error">Processing</button>
+        <button
+          className={`btn btn-xs  ${
+            shipped
+              ? "btn bg-green-400 text-white border-green-400"
+              : "btn-error"
+          }`}
+        >
+          {paid ? (shipped ? "Delivered" : "Processing") : "Pending"}
+        </button>
       </td>
       <td>
         {paid ? (

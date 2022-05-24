@@ -4,7 +4,7 @@ import auth from "../../../Firebase/Firebase.config";
 import Loader from "./../../../Components/Loader/Loader";
 import OrderMangeRow from "./OrderMangeRow";
 const ManageOrder = () => {
-  const { data, isLoading } = useQuery("orders", () =>
+  const { data, isLoading, refetch } = useQuery("orders", () =>
     fetch(`http://localhost:5000/orders/all?uid=${auth?.currentUser?.uid}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -27,6 +27,7 @@ const ManageOrder = () => {
           <option>Pending</option>
           <option>Unpaid</option>
           <option>Shipped</option>
+          <option>Delivered</option>
         </select>
       </div>
       <div className="overflow-x-auto">
@@ -50,7 +51,7 @@ const ManageOrder = () => {
             </thead>
             <tbody>
               {orderData.map((order) => (
-                <OrderMangeRow key={order._id} {...order} />
+                <OrderMangeRow key={order._id} {...order} refetch={refetch} />
               ))}
             </tbody>
           </table>
