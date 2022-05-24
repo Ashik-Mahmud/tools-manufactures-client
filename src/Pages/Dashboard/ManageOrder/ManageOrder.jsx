@@ -51,8 +51,13 @@ const ManageOrder = () => {
               </tr>
             </thead>
             <tbody>
-              {orderData.map((order) => (
-                <OrderMangeRow key={order._id} {...order} refetch={refetch} />
+              {orderData.map((order, ind) => (
+                <OrderMangeRow
+                  key={order._id}
+                  {...order}
+                  refetch={refetch}
+                  serialize={ind}
+                />
               ))}
             </tbody>
           </table>

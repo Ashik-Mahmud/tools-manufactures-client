@@ -14,6 +14,7 @@ const OrderMangeRow = ({
   createdAt,
   _id,
   shipped,
+  serialize,
 }) => {
   /* Handle Shipped Order */
   const handleShipped = async (id) => {
@@ -52,7 +53,7 @@ const OrderMangeRow = ({
 
   return (
     <tr>
-      <th>1</th>
+      <th>{serialize + 1}</th>
       <td title={createdAt}>
         <BsCalendarDate className="cursor-pointer" />
       </td>
@@ -77,7 +78,7 @@ const OrderMangeRow = ({
             paid ? (shipped ? "btn-primary" : "btn-success") : "btn-error"
           } btn btn-xs`}
         >
-          {paid ? (shipped ? "Delivered" : "Pending...") : "Unpaid"}
+          {paid ? (shipped ? "Delivered" : "Pending") : "Unpaid"}
         </button>
       </td>
       <td>

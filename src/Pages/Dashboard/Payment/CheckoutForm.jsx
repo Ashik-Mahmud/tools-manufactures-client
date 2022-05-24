@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import auth from "../../../Firebase/Firebase.config";
 const CheckoutForm = ({ singleOrder }) => {
   const stripe = useStripe();
@@ -68,9 +69,6 @@ const CheckoutForm = ({ singleOrder }) => {
     if (intentError) {
       return toast.error(intentError?.message);
     } else {
-      toast.success(
-        `Congrats!! Payment successfully done. Here is your TransactionID ${paymentIntent?.id}`
-      );
       if (paymentIntent?.status === "succeeded") {
         const data = {
           author: {
@@ -90,7 +88,7 @@ const CheckoutForm = ({ singleOrder }) => {
             new Date().toDateString() + " " + new Date().toLocaleTimeString(),
         };
         fetch(
-          `http://localhost:5000/orders?uid=${auth?.currentUser?.uid}&&productId=${singleOrder?._id}`,
+          `http://localhost:5000/orders?uid=${auth?.currentUser?.uid}&&orderId=${singleOrder?._id}`,
           {
             method: "PATCH",
             headers: {
@@ -120,8 +118,12 @@ const CheckoutForm = ({ singleOrder }) => {
                 }
               )
                 .then((res) => res.json())
-                .then((result) => {
-                  console.log(result);
+                .then(() => {
+                  Swal.fire(
+                    "Congrats!!",
+                    ` Payment successfully done. Here is your TransactionID ${paymentIntent?.id} & Check Your Email.`,
+                    "success"
+                  );
                 });
             }
           });
