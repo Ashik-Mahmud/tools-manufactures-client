@@ -51,6 +51,38 @@ const OrderMangeRow = ({
     });
   };
 
+  /* Handle Delete Order by Admin */
+  const handleOrderDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(
+          `http://localhost:5000/orders?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            if (result.success) {
+              refetch();
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          });
+      }
+    });
+  };
+
   return (
     <tr>
       <th>{serialize + 1}</th>
@@ -91,7 +123,11 @@ const OrderMangeRow = ({
         </button>
       </td>
       <td>
-        <button disabled={shipped && true} className="btn-error btn btn-xs">
+        <button
+          disabled={shipped && true}
+          onClick={() => handleOrderDelete(_id)}
+          className="btn-error btn btn-xs"
+        >
           <RiDeleteBack2Line />
         </button>
       </td>
