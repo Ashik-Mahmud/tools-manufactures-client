@@ -28,6 +28,7 @@ const Purchase = () => {
   if (isLoading) return <Loader />;
 
   const {
+    _id,
     image,
     productName,
     productDescription,
@@ -53,6 +54,7 @@ const Purchase = () => {
         image,
         price,
         orderQty,
+        productId: _id,
       },
       address: {
         address,

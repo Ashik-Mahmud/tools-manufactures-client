@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import BarLoader from "react-spinners/BarLoader";
+import Loader from "../../../Components/Loader/Loader";
 import TItle from "../../../Components/TItle/TItle";
 import CardTeam from "./CardTeam";
 const Teams = () => {
@@ -28,9 +28,7 @@ const Teams = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-10">
-            <BarLoader color={"#1972e6"} size={100} />
-          </div>
+          <Loader />
         )}
       </div>
     </section>

@@ -89,18 +89,40 @@ const CheckoutForm = ({ singleOrder }) => {
           createdAt:
             new Date().toDateString() + " " + new Date().toLocaleTimeString(),
         };
-        fetch(`http://localhost:5000/orders?uid=${auth?.currentUser?.uid}`, {
-          method: "PATCH",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
+        fetch(
+          `http://localhost:5000/orders?uid=${auth?.currentUser?.uid}&&productId=${singleOrder?._id}`,
+          {
+            method: "PATCH",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        )
           .then((res) => res.json())
           .then((result) => {
             if (result.success) {
               navigate(`/dashboard/my-orders`);
+              fetch(
+                `http://localhost:5000/products?uid=${auth?.currentUser?.uid}&&productId=${singleOrder?.productInfo?.productId}`,
+                {
+                  method: "PATCH",
+                  headers: {
+                    authorization: `Bearer ${localStorage.getItem(
+                      "accessToken"
+                    )}`,
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    orderQty: singleOrder?.productInfo?.orderQty,
+                  }),
+                }
+              )
+                .then((res) => res.json())
+                .then((result) => {
+                  console.log(result);
+                });
             }
           });
       }
