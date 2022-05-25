@@ -7,7 +7,6 @@ const useBlog = () => {
     fetch(`http://localhost:5000/blogs/all`)
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
         setLoading(true);
         setBlogs(result?.result);
       });

@@ -2,6 +2,7 @@ import React from "react";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
 import useTitle from "../../../Hooks/useTitle";
@@ -9,7 +10,7 @@ const ManageBlog = () => {
   useTitle("Manage Blogs");
   const navigate = useNavigate();
   /* call to get all the added blogs for particular users */
-  const { data, isLoading } = useQuery("blogs", () =>
+  const { data, isLoading, refetch } = useQuery("blogs", () =>
     fetch(`http://localhost:5000/blogs?uid=${auth?.currentUser?.uid}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -17,8 +18,41 @@ const ManageBlog = () => {
     }).then((res) => res.json())
   );
   if (isLoading) return <Loader />;
-  console.log(data);
+
   const blogsData = data?.result;
+
+  /*  Handle Blog Delete */
+  const handleDeleteBlog = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(
+          `http://localhost:5000/blogs?uid=${auth?.currentUser?.uid}&&deletedId=${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            if (result.success) {
+              refetch();
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          });
+      }
+    });
+  };
+
   return (
     <div>
       <h3 className="text-3xl font-semibold">Manage Blog</h3>
@@ -55,7 +89,10 @@ const ManageBlog = () => {
                     </button>
                   </td>
                   <td>
-                    <button className="btn btn-xs btn-error">
+                    <button
+                      onClick={() => handleDeleteBlog(blog._id)}
+                      className="btn btn-xs btn-error"
+                    >
                       <AiFillDelete />
                     </button>
                   </td>
