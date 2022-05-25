@@ -2,10 +2,14 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
+import Loader from "../../Components/Loader/Loader";
+import useBlog from "../../Hooks/useBlog";
 import useTitle from "../../Hooks/useTitle";
 import CardBlog from "./CardBlog";
 const Blogs = () => {
   useTitle("Blogs");
+  const [blogs, loading] = useBlog();
+  if (!loading) return <Loader />;
   return (
     <section className="blogs">
       <div className="breadcrumb text-center py-20 bg-base-200">
@@ -35,16 +39,21 @@ const Blogs = () => {
         </div>
       </div>
       <div className="container mx-auto py-10">
-        <Fade bottom distance="30px">
-          <div className="blogs-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
-            <CardBlog />
-            <CardBlog />
-            <CardBlog />
-            <CardBlog />
-            <CardBlog />
-            <CardBlog />
-          </div>
-        </Fade>
+        {blogs.length > 0 ? (
+          <Fade bottom distance="30px">
+            <div className="blogs-content grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
+              {blogs.map((blog) => (
+                <CardBlog key={blog._id} {...blog} />
+              ))}
+            </div>
+          </Fade>
+        ) : (
+          <>
+            <div className="text-center py-10">
+              <h3 className="text-2xl font-semibold">No Blog posted yet.</h3>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );
