@@ -1,13 +1,13 @@
 import React from "react";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loader from "../../../Components/Loader/Loader";
 import auth from "../../../Firebase/Firebase.config";
 import useTitle from "../../../Hooks/useTitle";
 const ManageBlog = () => {
   useTitle("Manage Blogs");
-
+  const navigate = useNavigate();
   /* call to get all the added blogs for particular users */
   const { data, isLoading } = useQuery("blogs", () =>
     fetch(`http://localhost:5000/blogs?uid=${auth?.currentUser?.uid}`, {
@@ -45,7 +45,12 @@ const ManageBlog = () => {
                   <td>{blog?.views ? blog.views : 0}</td>
                   <td>{blog?.comments ? blog.comments : 0}</td>
                   <td>
-                    <button className="btn btn-xs btn-success">
+                    <button
+                      onClick={() =>
+                        navigate(`/dashboard/management-blog/edit/${blog._id}`)
+                      }
+                      className="btn btn-xs btn-success"
+                    >
                       <AiFillEdit />
                     </button>
                   </td>

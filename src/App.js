@@ -11,6 +11,7 @@ import AddProduct from "./Pages/Dashboard/AddProduct/AddProduct";
 import AddReview from "./Pages/Dashboard/AddReview/AddReview";
 import AddBlog from "./Pages/Dashboard/BlogManagement/addBlog";
 import BlogManagement from "./Pages/Dashboard/BlogManagement/BlogManagement";
+import EditBlog from "./Pages/Dashboard/BlogManagement/EditBlog";
 import ManageBlog from "./Pages/Dashboard/BlogManagement/ManageBlog";
 import Dashboard from "./Pages/Dashboard/Dashboard/Dashboard";
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin/MakeAdmin";
@@ -68,6 +69,7 @@ function App() {
                 <Route index element={<AddBlog />} />
                 <Route path="add-blog" element={<AddBlog />} />
                 <Route path="manageBlogs" element={<ManageBlog />} />
+                <Route path="edit/:editId" element={<EditBlog />} />
               </Route>
               <Route path="add-review" element={<RequireUser><AddReview /></RequireUser>} /> 
               <Route path="make-admin" element={<RequireAdmin><MakeAdmin /></RequireAdmin>}/>
