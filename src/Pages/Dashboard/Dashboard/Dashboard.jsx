@@ -104,7 +104,10 @@ const Dashboard = () => {
             <NavLink to="/dashboard/profile">Profile</NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/management-blog">Blog Management</NavLink>
+            <NavLink to="/dashboard/management-blog">
+              Blog Management{" "}
+              <small className="badge badge-outline text-sm">New</small>
+            </NavLink>
           </li>
 
           {isAdmin && (

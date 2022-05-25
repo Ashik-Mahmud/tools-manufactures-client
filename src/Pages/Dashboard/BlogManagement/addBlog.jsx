@@ -1,10 +1,44 @@
 import React from "react";
-
+import auth from "../../../Firebase/Firebase.config";
 const addBlog = () => {
+  /*   Handle Create Brand New Post For Users */
+  const handleCreatePostForm = async (event) => {
+    event.preventDefault();
+    const title = event.target.title.value.trim();
+    const category = event.target.category.value.trim();
+    const description = event.target.description.value.trim();
+    const blogData = {
+      title: title,
+      category: category,
+      description: description,
+      createAt: new Date().toDateString(),
+      author: {
+        name: auth?.currentUser?.displayName,
+        uid: auth?.currentUser?.uid,
+      },
+    };
+
+    await fetch(`http://localhost:5000/blogs`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(blogData),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+      });
+  };
   return (
     <div className="p-4 m-4">
       <h3 className="text-2xl font-semibold my-2">Add Blogs</h3>
-      <form action="" className="shadow p-10 rounded flex flex-col gap-4">
+      <form
+        onSubmit={handleCreatePostForm}
+        action=""
+        className="shadow p-10 rounded flex flex-col gap-4"
+      >
         <div>
           <label htmlFor="title">Title</label>
           <input
@@ -12,6 +46,8 @@ const addBlog = () => {
             type="text"
             placeholder="Title"
             id="title"
+            required
+            name="title"
           />
         </div>
 
@@ -21,7 +57,9 @@ const addBlog = () => {
             className="input input-bordered w-full"
             type="text"
             placeholder="Category"
+            name="category"
             id="category"
+            required
           />
         </div>
         <div>
@@ -32,6 +70,7 @@ const addBlog = () => {
             cols="30"
             className="textarea textarea-bordered w-full"
             rows="5"
+            required
           ></textarea>
         </div>
         <div>

@@ -1,9 +1,10 @@
 import React from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-
+import useTitle from "../../../Hooks/useTitle";
 const BlogManagement = () => {
   const location = useLocation();
   const path = location?.pathname;
+  useTitle(`Blog Management`);
 
   return (
     <div>
