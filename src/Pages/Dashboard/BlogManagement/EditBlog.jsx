@@ -2,8 +2,8 @@ import React from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../Components/Loader/Loader";
+import auth from "../../../Firebase/Firebase.config";
 import useBlog from "../../../Hooks/useBlog";
-
 const EditBlog = () => {
   const navigate = useNavigate();
   const { editId } = useParams();
@@ -22,7 +22,7 @@ const EditBlog = () => {
       createAt: new Date().toDateString(),
     };
 
-    await fetch(`http://localhost:5000/blogs`, {
+    await fetch(`http://localhost:5000/blogs?uid=${auth?.currentUser?.uid}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
