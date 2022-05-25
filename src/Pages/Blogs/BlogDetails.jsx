@@ -1,18 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 import { BiSend } from "react-icons/bi";
 import { MdArrowBackIos } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../Components/Loader/Loader";
+import auth from "../../Firebase/Firebase.config";
 import useBlog from "../../Hooks/useBlog";
 import Comment from "./Comment";
-
 const BlogDetails = () => {
   const navigate = useNavigate();
   const { blogId } = useParams();
   const [blogs, loading] = useBlog();
+  const [commentText, setCommentText] = useState("");
+
   if (!loading) return <Loader />;
 
   const singleBlog = blogs.find((blog) => blog._id === blogId);
+
+  /* Handle Comments */
+  const handleSendComment = async () => {
+    if (!commentText) return toast.error(`Comment field is required.`);
+    const commentData = {
+      comment: commentText,
+      author: {
+        name: auth?.currentUser?.displayName,
+        uid: auth?.currentUser?.uid,
+        photo: auth?.currentUser?.photoURL,
+      },
+      createdAt:
+        new Date().toDateString() + " at " + new Date().toLocaleTimeString(),
+    };
+    await fetch(
+      `http://localhost:5000/blogs/comment?uid=${auth?.currentUser?.uid}`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(commentData),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
 
   return (
     <div className="blog-details py-10">
@@ -53,10 +86,24 @@ const BlogDetails = () => {
                   type="text"
                   placeholder="Type Comment..."
                   className="w-full p-5 outline-none"
+                  value={commentText}
+                  onChange={(event) => setCommentText(event.target.value)}
                 />
-                <button className="bg-base-300 px-6">
-                  <BiSend />
-                </button>
+                {auth?.currentUser ? (
+                  <button
+                    onClick={handleSendComment}
+                    className="bg-base-300 px-6"
+                  >
+                    <BiSend />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => navigate("/login")}
+                    className="bg-base-300 px-6"
+                  >
+                    <BiSend />
+                  </button>
+                )}
               </div>
 
               <div className="user-comments flex flex-col gap-4">
