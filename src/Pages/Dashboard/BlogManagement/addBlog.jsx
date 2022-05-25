@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 import auth from "../../../Firebase/Firebase.config";
 const addBlog = () => {
   /*   Handle Create Brand New Post For Users */
@@ -28,7 +29,10 @@ const addBlog = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        if (result.success) {
+          toast.success(result.message);
+          event.target.reset();
+        }
       });
   };
   return (
