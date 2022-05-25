@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 import { BsSearch } from "react-icons/bs";
 import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
@@ -8,8 +9,21 @@ import useTitle from "../../Hooks/useTitle";
 import CardBlog from "./CardBlog";
 const Blogs = () => {
   useTitle("Blogs");
-  const [blogs, loading] = useBlog();
+  const [blogs, loading, setBlogs] = useBlog();
+
   if (!loading) return <Loader />;
+  /* Handle Blog Search */
+  const handleBlogSearch = async (event) => {
+    event.preventDefault();
+    const searchText = event.target.searchText.value;
+    if (!searchText) return toast.error(`Search field is required`);
+    await fetch(`http://localhost:5000/blogs/search?q=${searchText}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setBlogs(data?.result);
+      });
+  };
+
   return (
     <section className="blogs">
       <div className="breadcrumb text-center py-20 bg-base-200">
@@ -25,12 +39,14 @@ const Blogs = () => {
           </div>
           <form
             action=""
+            onSubmit={handleBlogSearch}
             className="search flex items-stretch p-2 bg-base-100 rounded-md w-full md:w-5/12 mx-auto my-2"
           >
             <input
               type="search"
               placeholder="Search Blog..."
               className="p-4 outline-none w-full"
+              name="searchText"
             />
             <button className="px-6 bg-primary text-white rounded-md">
               <BsSearch />

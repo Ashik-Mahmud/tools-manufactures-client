@@ -11,7 +11,7 @@ const useBlog = () => {
         setBlogs(result?.result);
       });
   }, []);
-  return [blogs, loading];
+  return [blogs, loading, setBlogs];
 };
 
 export default useBlog;
