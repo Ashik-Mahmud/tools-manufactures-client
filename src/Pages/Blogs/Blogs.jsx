@@ -17,7 +17,9 @@ const Blogs = () => {
     event.preventDefault();
     const searchText = event.target.searchText.value;
     if (!searchText) return toast.error(`Search field is required`);
-    await fetch(`http://localhost:5000/blogs/search?q=${searchText}`)
+    await fetch(
+      `https://tools-manufactures.herokuapp.com/blogs/search?q=${searchText}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data?.result);

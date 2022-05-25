@@ -34,7 +34,7 @@ These are technologies which one use to create this application.
 
 ---
 
-## Here is Live Link of This application <https://tools-manufactures.web.app//>
+## Here is Live Link of This application <https://tools-manufactures.web.app/>
 
 ---
 

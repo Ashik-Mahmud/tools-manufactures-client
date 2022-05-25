@@ -22,14 +22,17 @@ const EditBlog = () => {
       createAt: new Date().toDateString(),
     };
 
-    await fetch(`http://localhost:5000/blogs?uid=${auth?.currentUser?.uid}`, {
-      method: "PUT",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(blogData),
-    })
+    await fetch(
+      `https://tools-manufactures.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(blogData),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result.success) {

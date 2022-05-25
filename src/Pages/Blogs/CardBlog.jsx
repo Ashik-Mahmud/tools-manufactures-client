@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const CardBlog = ({ category, title, description, _id, views, comment }) => {
   /* Handle Views */
   const handleViews = async (id) => {
-    await fetch(`http://localhost:5000/blogs/views`, {
+    await fetch(`https://tools-manufactures.herokuapp.com/blogs/views`, {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ id }),

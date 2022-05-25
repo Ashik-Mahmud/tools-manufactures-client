@@ -10,7 +10,7 @@ const Comment = ({ comment, author, createdAt, _id, refetch }) => {
     );
     if (isConfirmed) {
       await fetch(
-        `http://localhost:5000/blogs/comment?uid=${auth?.currentUser?.uid}&&commentId=${id}`,
+        `https://tools-manufactures.herokuapp.com/blogs/comment?uid=${auth?.currentUser?.uid}&&commentId=${id}`,
         {
           method: "DELETE",
           headers: {

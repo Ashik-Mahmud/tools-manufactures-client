@@ -11,11 +11,14 @@ const ManageBlog = () => {
   const navigate = useNavigate();
   /* call to get all the added blogs for particular users */
   const { data, isLoading, refetch } = useQuery("blogs", () =>
-    fetch(`http://localhost:5000/blogs?uid=${auth?.currentUser?.uid}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://tools-manufactures.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    ).then((res) => res.json())
   );
   if (isLoading) return <Loader />;
 
@@ -34,7 +37,7 @@ const ManageBlog = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `http://localhost:5000/blogs?uid=${auth?.currentUser?.uid}&&deletedId=${id}`,
+          `https://tools-manufactures.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}&&deletedId=${id}`,
           {
             method: "DELETE",
             headers: {

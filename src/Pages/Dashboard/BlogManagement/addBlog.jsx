@@ -19,7 +19,7 @@ const addBlog = () => {
       },
     };
 
-    await fetch(`http://localhost:5000/blogs`, {
+    await fetch(`https://tools-manufactures.herokuapp.com/blogs`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
