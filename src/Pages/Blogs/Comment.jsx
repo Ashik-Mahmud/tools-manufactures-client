@@ -1,8 +1,33 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 import { BiTrash } from "react-icons/bi";
 import auth from "../../Firebase/Firebase.config";
+const Comment = ({ comment, author, createdAt, _id, refetch }) => {
+  /*  Handle Delete Comment */
+  const handleDeleteComment = async (id) => {
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this comment?"
+    );
+    if (isConfirmed) {
+      await fetch(
+        `http://localhost:5000/blogs/comment?uid=${auth?.currentUser?.uid}&&commentId=${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            toast.success(data.message);
+            refetch();
+          }
+        });
+    }
+  };
 
-const Comment = ({ comment, author, createdAt }) => {
   return (
     <div className="comment flex gap-8 bg-base-200 p-2 rounded-md">
       <div className="avatar w-28 h-20 grid place-items-center text-4xl font-semibold lg:w-20 border rounded overflow-hidden">
@@ -20,7 +45,10 @@ const Comment = ({ comment, author, createdAt }) => {
         <p className="text-sm py-1">{comment}</p>
       </div>
       {auth?.currentUser?.uid === author.uid && (
-        <div className="delete-btn cursor-pointer text-error">
+        <div
+          onClick={() => handleDeleteComment(_id)}
+          className="delete-btn cursor-pointer text-error"
+        >
           <BiTrash />
         </div>
       )}

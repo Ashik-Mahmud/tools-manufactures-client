@@ -138,7 +138,7 @@ const BlogDetails = () => {
                   </div>
                 ) : data?.result?.length > 0 ? (
                   data?.result.map((comment) => (
-                    <Comment key={comment._id} {...comment} />
+                    <Comment refetch={refetch} key={comment._id} {...comment} />
                   ))
                 ) : (
                   <div className="text-center py-5">
