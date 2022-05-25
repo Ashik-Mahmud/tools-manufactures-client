@@ -1,4 +1,5 @@
 import React from "react";
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import useTitle from "../../../Hooks/useTitle";
 
 const ManageBlog = () => {
@@ -11,31 +12,31 @@ const ManageBlog = () => {
           <thead>
             <tr>
               <th></th>
-              <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Views</th>
+              <th>Comments</th>
+              <th>Edit</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th>1</th>
-              <td>Cy Ganderton</td>
-              <td>Quality Control Specialist</td>
-              <td>Blue</td>
-            </tr>
-
-            <tr>
-              <th>2</th>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
-              <td>Purple</td>
-            </tr>
-
-            <tr>
-              <th>3</th>
-              <td>Brice Swyre</td>
-              <td>Tax Accountant</td>
-              <td>Red</td>
+              <td>Cy Ganderton Quality Control Specialist</td>
+              <td>Tech</td>
+              <td>150</td>
+              <td>6</td>
+              <td>
+                <button className="btn btn-xs btn-success">
+                  <AiFillEdit />
+                </button>
+              </td>
+              <td>
+                <button className="btn btn-xs btn-error">
+                  <AiFillDelete />
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
