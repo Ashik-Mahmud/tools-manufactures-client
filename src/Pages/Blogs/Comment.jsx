@@ -1,25 +1,29 @@
 import React from "react";
 import { BiTrash } from "react-icons/bi";
+import auth from "../../Firebase/Firebase.config";
 
-const Comment = () => {
+const Comment = ({ comment, author, createdAt }) => {
   return (
     <div className="comment flex gap-8 bg-base-200 p-2 rounded-md">
       <div className="avatar w-28 lg:w-20 border rounded overflow-hidden">
-        <img
-          src="https://lh3.googleusercontent.com/a-/AOh14GgJ3jEJ2pgW5pURY-Pzi3ayUjZPrbE82cPa8BBEZw=s96-c"
-          alt="avatar"
-        />
+        {author?.photo ? (
+          <img src={author?.photo} alt={author?.name} />
+        ) : (
+          author.name.slice(0, 1)
+        )}
       </div>
       <div className="details w-11/12">
         <div className="info flex items-center justify-between flex-wrap">
-          <h3 className="text-md font-semibold">Ashik Mahmud</h3>
-          <div className="date">23 Jan, 2022 at 6:45PM</div>
+          <h3 className="text-md font-semibold">{author?.name}</h3>
+          <div className="date">{createdAt}</div>
         </div>
-        <p className="text-sm py-1">This is awesome post really like</p>
+        <p className="text-sm py-1">{comment}</p>
       </div>
-      <div className="delete-btn cursor-pointer text-error">
-        <BiTrash />
-      </div>
+      {auth?.currentUser?.uid === author.uid && (
+        <div className="delete-btn cursor-pointer text-error">
+          <BiTrash />
+        </div>
+      )}
     </div>
   );
 };

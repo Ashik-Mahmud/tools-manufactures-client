@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { BiSend } from "react-icons/bi";
 import { MdArrowBackIos } from "react-icons/md";
+import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import BeatLoader from "react-spinners/BeatLoader";
 import Loader from "../../Components/Loader/Loader";
 import auth from "../../Firebase/Firebase.config";
 import useBlog from "../../Hooks/useBlog";
@@ -13,6 +15,13 @@ const BlogDetails = () => {
   const [blogs, loading] = useBlog();
   const [commentText, setCommentText] = useState("");
 
+  /* Get Real Time Comment for Each POST */
+  const { data, isLoading, refetch } = useQuery(["comments", blogId], () =>
+    fetch(`http://localhost:5000/blogs/comments?postId=${blogId}`).then((res) =>
+      res.json()
+    )
+  );
+
   if (!loading) return <Loader />;
 
   const singleBlog = blogs.find((blog) => blog._id === blogId);
@@ -22,6 +31,7 @@ const BlogDetails = () => {
     if (!commentText) return toast.error(`Comment field is required.`);
     const commentData = {
       comment: commentText,
+      postId: blogId,
       author: {
         name: auth?.currentUser?.displayName,
         uid: auth?.currentUser?.uid,
@@ -43,10 +53,10 @@ const BlogDetails = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.success) {
           toast.success(data.message);
           setCommentText("");
+          refetch();
         }
       });
   };
@@ -111,8 +121,21 @@ const BlogDetails = () => {
               </div>
 
               <div className="user-comments flex flex-col gap-4">
-                <Comment />
-                <Comment />
+                {isLoading ? (
+                  <div className="text-center py-3">
+                    <BeatLoader color={"#1c95f8"} loading={loading} size={20} />
+                  </div>
+                ) : data?.result?.length > 0 ? (
+                  data?.result.map((comment) => (
+                    <Comment key={comment._id} {...comment} />
+                  ))
+                ) : (
+                  <div className="text-center py-5">
+                    <span className="text-xl font-semibold">
+                      No Comments found yet.
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
