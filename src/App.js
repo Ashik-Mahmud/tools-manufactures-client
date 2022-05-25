@@ -54,7 +54,6 @@ function App() {
           <Route path="/portfolios" element={<Portfolios />} />
           <Route path="/contact" element={<Contact />} />
 
-
          {/* Private Routes  */}
           <Route path="/purchase/:purchaseId" element={<RequireAuth><Purchase /></RequireAuth>} />
           {/* Dashboard Routes */}
@@ -76,8 +75,6 @@ function App() {
               <Route path="add-review" element={<RequireUser><AddReview /></RequireUser>} /> 
               <Route path="make-admin" element={<RequireAdmin><MakeAdmin /></RequireAdmin>}/>
           </Route>
-
-
 
           {/* Not found Routes */}
           <Route path="*" element={<NotFound />} />

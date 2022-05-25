@@ -104,7 +104,10 @@ const ManageBlog = () => {
           <>
             <div className="text-center py-10">
               <h2 className="text-2xl font-semibold">No Blog created yet.</h2>
-              <Link className="btn btn-primary my-6" to="/dashboard/add-blog">
+              <Link
+                className="btn btn-primary my-6"
+                to="/dashboard/management-blog/add-blog"
+              >
                 Add Blog
               </Link>
             </div>

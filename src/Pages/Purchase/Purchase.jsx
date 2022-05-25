@@ -50,6 +50,8 @@ const Purchase = () => {
       return toast.error(`Phone number must need number value`);
     if (!address) return toast.error(`Address field is required`);
     if (!orderQty) return toast.error(`Order Quantity field is required`);
+    if (orderQty > availableQty)
+      return toast.error(`Not Enough Stock this product.`);
     const orderData = {
       productInfo: {
         productName,
@@ -91,6 +93,7 @@ const Purchase = () => {
         if (result.success) {
           toast.success(result?.message);
           formRef.current.reset();
+          navigate(`/dashboard/my-orders`);
         } else {
           toast.error(result?.message);
         }
