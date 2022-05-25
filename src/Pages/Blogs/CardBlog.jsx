@@ -1,7 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CardBlog = ({ category, title, description, _id }) => {
+const CardBlog = ({ category, title, description, _id, views }) => {
+  /* Handle Views */
+  const handleViews = async (id) => {
+    await fetch(`http://localhost:5000/blogs/views`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ id }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   return (
     <div className="p-4">
       <div className="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
@@ -13,6 +26,7 @@ const CardBlog = ({ category, title, description, _id }) => {
         </h1>
         <p className="leading-relaxed mb-3">{description?.slice(0, 80)}</p>
         <Link
+          onClick={() => handleViews(_id)}
           to={`/blogDetails/${_id}`}
           className="text-indigo-500 inline-flex items-center"
           href="/"
@@ -45,7 +59,7 @@ const CardBlog = ({ category, title, description, _id }) => {
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
               <circle cx="12" cy="12" r="3"></circle>
             </svg>
-            1.2K
+            {views ? views : 0}
           </span>
           <span className="text-gray-400 inline-flex items-center leading-none text-sm">
             <svg
