@@ -5,7 +5,7 @@ import auth from "../../Firebase/Firebase.config";
 const Comment = ({ comment, author, createdAt }) => {
   return (
     <div className="comment flex gap-8 bg-base-200 p-2 rounded-md">
-      <div className="avatar w-28 lg:w-20 border rounded overflow-hidden">
+      <div className="avatar w-28 h-20 grid place-items-center text-4xl font-semibold lg:w-20 border rounded overflow-hidden">
         {author?.photo ? (
           <img src={author?.photo} alt={author?.name} />
         ) : (

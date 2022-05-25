@@ -57,8 +57,19 @@ const BlogDetails = () => {
           toast.success(data.message);
           setCommentText("");
           refetch();
+          commentCount();
         }
       });
+  };
+
+  const commentCount = async () => {
+    await fetch(`http://localhost:5000/blogs/commentCount?postId=${blogId}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ comment: 1 }),
+    }).then((res) => res.json());
   };
 
   return (

@@ -8,11 +8,7 @@ const CardBlog = ({ category, title, description, _id, views }) => {
       method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ id }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
+    }).then((res) => res.json());
   };
 
   return (
