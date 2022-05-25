@@ -2,6 +2,7 @@ import React from "react";
 import { BiSend } from "react-icons/bi";
 import { MdArrowBackIos } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
+import Comment from "./Comment";
 
 const BlogDetails = () => {
   const navigate = useNavigate();
@@ -76,11 +77,20 @@ const BlogDetails = () => {
             <hr />
             <div className="comments-area pt-5">
               <h3 className="text-xl font-semibold">Comments</h3>
-              <div className="commentBox">
-                <input type="text" placeholder="Type Comment..." />
-                <button>
+              <div className="commentBox flex items-stretch border my-5 p-2">
+                <input
+                  type="text"
+                  placeholder="Type Comment..."
+                  className="w-full p-5 outline-none"
+                />
+                <button className="bg-base-300 px-6">
                   <BiSend />
                 </button>
+              </div>
+
+              <div className="user-comments flex flex-col gap-4">
+                <Comment />
+                <Comment />
               </div>
             </div>
           </div>
