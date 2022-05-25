@@ -77,7 +77,7 @@ const ManageBlog = () => {
                   <td>{blog?.title}</td>
                   <td>{blog?.category}</td>
                   <td>{blog?.views ? blog.views : 0}</td>
-                  <td>{blog?.comments ? blog.comments : 0}</td>
+                  <td>{blog?.comment ? blog.comment : 0}</td>
                   <td>
                     <button
                       onClick={() =>

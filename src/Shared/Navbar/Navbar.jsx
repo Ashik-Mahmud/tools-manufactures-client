@@ -107,15 +107,15 @@ const Navbar = () => {
             <div className="flex-none gap-2">
               <div className="dropdown dropdown-end">
                 <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full">
-                    <img
-                      src={
-                        user?.photoURL
-                          ? user?.photoURL
-                          : "https://api.lorem.space/image/face?hash=33791"
-                      }
-                      alt={user?.displayName}
-                    />
+                  <div
+                    style={{ display: "grid" }}
+                    className="w-10 h-10 rounded-full border bg-base-300 grid place-items-center"
+                  >
+                    {user?.photoURL ? (
+                      <img src={user?.photoURL} alt={user?.displayName} />
+                    ) : (
+                      user?.displayName.slice(0, 1)
+                    )}
                   </div>
                 </label>
                 <ul

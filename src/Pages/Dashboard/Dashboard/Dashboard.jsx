@@ -94,7 +94,8 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink to="/dashboard/payment-history">
-                  Payment History
+                  Payment History{" "}
+                  <small className="badge badge-outline text-sm">New</small>
                 </NavLink>
               </li>
             </>
