@@ -4,6 +4,16 @@ import { BiSend } from "react-icons/bi";
 import { MdArrowBackIos } from "react-icons/md";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
 import BeatLoader from "react-spinners/BeatLoader";
 import Loader from "../../Components/Loader/Loader";
 import auth from "../../Firebase/Firebase.config";
@@ -87,6 +97,7 @@ const BlogDetails = () => {
               />
               <h2 className="text-2xl font-semibold">{singleBlog?.title}</h2>
             </div>
+
             <div className="image h-52 w-full rounded-lg bg-base-300 grid place-items-center">
               Image Not Loaded
             </div>
@@ -108,7 +119,23 @@ const BlogDetails = () => {
           <div className="card-footer">
             <hr />
             <div className="comments-area pt-5">
-              <h3 className="text-xl font-semibold">Comments</h3>
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-semibold">Comments</h3>
+                <div className="flex items-center gap-3">
+                  <FacebookShareButton url={window.location.href}>
+                    <FacebookIcon size={40} round={true} />
+                  </FacebookShareButton>
+                  <TwitterShareButton url={window.location.href}>
+                    <TwitterIcon size={40} round={true} />
+                  </TwitterShareButton>
+                  <WhatsappShareButton url={window.location.href}>
+                    <WhatsappIcon size={40} round={true} />
+                  </WhatsappShareButton>
+                  <LinkedinShareButton url={window.location.href}>
+                    <LinkedinIcon size={40} round={true} />
+                  </LinkedinShareButton>
+                </div>
+              </div>
               <div className="commentBox flex items-stretch border my-5 p-2">
                 <input
                   type="text"
