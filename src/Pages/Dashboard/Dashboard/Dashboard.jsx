@@ -103,6 +103,9 @@ const Dashboard = () => {
           <li>
             <NavLink to="/dashboard/profile">Profile</NavLink>
           </li>
+          <li>
+            <NavLink to="/dashboard/management-blog">Blog Management</NavLink>
+          </li>
 
           {isAdmin && (
             <>

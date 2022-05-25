@@ -9,6 +9,9 @@ import Blogs from "./Pages/Blogs/Blogs";
 import Contact from "./Pages/Contact/Contact";
 import AddProduct from "./Pages/Dashboard/AddProduct/AddProduct";
 import AddReview from "./Pages/Dashboard/AddReview/AddReview";
+import AddBlog from "./Pages/Dashboard/BlogManagement/addBlog";
+import BlogManagement from "./Pages/Dashboard/BlogManagement/BlogManagement";
+import ManageBlog from "./Pages/Dashboard/BlogManagement/ManageBlog";
 import Dashboard from "./Pages/Dashboard/Dashboard/Dashboard";
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin/MakeAdmin";
 import ManageOrder from "./Pages/Dashboard/ManageOrder/ManageOrder";
@@ -61,6 +64,11 @@ function App() {
               <Route path="payment-history" element={<RequireUser><PaymentHistory /></RequireUser>} /> 
               <Route path="payment/:paymentId" element={<Payment />} />
               <Route path="profile" element={<Profile />} /> 
+              <Route path="management-blog" element={<BlogManagement />} > 
+                <Route index element={<AddBlog />} />
+                <Route path="add-blog" element={<AddBlog />} />
+                <Route path="manageBlogs" element={<ManageBlog />} />
+              </Route>
               <Route path="add-review" element={<RequireUser><AddReview /></RequireUser>} /> 
               <Route path="make-admin" element={<RequireAdmin><MakeAdmin /></RequireAdmin>}/>
           </Route>
