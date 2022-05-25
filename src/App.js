@@ -5,6 +5,7 @@ import RequireAdmin from "./Auth/RequireAdmin";
 import RequireAuth from "./Auth/RequireAuth";
 import RequireUser from "./Auth/RequireUser";
 import useFirebase from "./Hooks/useFirebase";
+import BlogDetails from "./Pages/Blogs/BlogDetails";
 import Blogs from "./Pages/Blogs/Blogs";
 import Contact from "./Pages/Contact/Contact";
 import AddProduct from "./Pages/Dashboard/AddProduct/AddProduct";
@@ -48,6 +49,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogDetails/:blogId" element={<BlogDetails />} />
           <Route path="/shops" element={<Shop />} />
           <Route path="/portfolios" element={<Portfolios />} />
           <Route path="/contact" element={<Contact />} />
