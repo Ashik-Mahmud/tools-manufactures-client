@@ -22,7 +22,7 @@ const EditBlog = () => {
       createAt: new Date().toDateString(),
     };
     await fetch(
-      `http://localhost:5000/blogs?uid=${auth?.currentUser?.uid}&&editId=${editId}`,
+      `https://tools-manufactures.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}&&editId=${editId}`,
       {
         method: "PUT",
         headers: {
