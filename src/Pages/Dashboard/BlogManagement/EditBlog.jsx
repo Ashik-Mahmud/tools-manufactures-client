@@ -23,7 +23,7 @@ const EditBlog = () => {
     };
 
     await fetch(
-      `https://tools-manufactures.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}&&editId=${editId}`,
       {
         method: "PUT",
         headers: {
