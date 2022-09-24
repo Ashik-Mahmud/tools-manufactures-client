@@ -1,6 +1,15 @@
 import React from "react";
 import { AiTwotoneStar } from "react-icons/ai";
 const CardReview = ({ reviewText, author, rating }) => {
+  const stars = [];
+  for (let i = 0; i < 5; i++) {
+    if (i < rating) {
+      stars.push(<AiTwotoneStar key={i} className="text-orange-500" />);
+    } else {
+      stars.push(<AiTwotoneStar key={i} className="text-gray-400" />);
+    }
+  }
+
   return (
     <div className="p-4  w-full">
       <div className="h-full bg-base-200 p-8 rounded">
@@ -14,7 +23,7 @@ const CardReview = ({ reviewText, author, rating }) => {
         </svg>
         <p className="leading-relaxed mb-6">{reviewText}</p>
         <a className="inline-flex items-center" href="/">
-          <div className="w-12 h-12 rounded-full border font-semibold grid place-items-center bg-base-300">
+          <div className="w-12 h-12 rounded-full border font-semibold grid place-items-center bg-base-300 overflow-hidden">
             {author?.photo ? (
               <img
                 alt="testimonial"
@@ -27,9 +36,7 @@ const CardReview = ({ reviewText, author, rating }) => {
           </div>
           <span className="flex-grow flex flex-col pl-4">
             <div className="stars flex items-center gap-1 mb-1">
-              {[...Array(rating).keys()].map((ind) => (
-                <AiTwotoneStar key={ind} className="text-orange-500" />
-              ))}
+              {stars.map((star) => star)}
             </div>
             <span className="title-font font-medium text-gray-900">
               {author?.name}
