@@ -15,7 +15,7 @@ const CheckoutForm = ({ singleOrder }) => {
     Number(singleOrder?.productInfo?.price);
   useEffect(() => {
     fetch(
-      `https://tools-manufactures.herokuapp.com/payment/create-payment-intent?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures-server-production.up.railway.app/payment/create-payment-intent?uid=${auth?.currentUser?.uid}`,
       {
         method: "POST",
         headers: {
@@ -88,7 +88,7 @@ const CheckoutForm = ({ singleOrder }) => {
             new Date().toDateString() + " " + new Date().toLocaleTimeString(),
         };
         fetch(
-          `https://tools-manufactures.herokuapp.com/orders?uid=${auth?.currentUser?.uid}&&orderId=${singleOrder?._id}`,
+          `https://tools-manufactures-server-production.up.railway.app/orders?uid=${auth?.currentUser?.uid}&&orderId=${singleOrder?._id}`,
           {
             method: "PATCH",
             headers: {
@@ -103,7 +103,7 @@ const CheckoutForm = ({ singleOrder }) => {
             if (result.success) {
               navigate(`/dashboard/my-orders`);
               fetch(
-                `https://tools-manufactures.herokuapp.com/products?uid=${auth?.currentUser?.uid}&&productId=${singleOrder?.productInfo?.productId}`,
+                `https://tools-manufactures-server-production.up.railway.app/products?uid=${auth?.currentUser?.uid}&&productId=${singleOrder?.productInfo?.productId}`,
                 {
                   method: "PATCH",
                   headers: {

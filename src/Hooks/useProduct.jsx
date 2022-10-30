@@ -4,7 +4,9 @@ const useProduct = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch(`https://tools-manufactures.herokuapp.com/products/all`)
+    fetch(
+      `https://tools-manufactures-server-production.up.railway.app/products/all`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProducts(data?.result);

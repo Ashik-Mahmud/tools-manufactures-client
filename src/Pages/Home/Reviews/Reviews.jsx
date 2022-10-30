@@ -36,7 +36,7 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch(`https://tools-manufactures.herokuapp.com/reviews`)
+    fetch(`https://tools-manufactures-server-production.up.railway.app/reviews`)
       .then((res) => res.json())
       .then((result) => {
         setLoading(true);

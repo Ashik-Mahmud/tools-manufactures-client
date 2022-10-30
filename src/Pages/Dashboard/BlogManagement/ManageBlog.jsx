@@ -12,7 +12,7 @@ const ManageBlog = () => {
   /* call to get all the added blogs for particular users */
   const { data, isLoading, refetch } = useQuery("blogs", () =>
     fetch(
-      `https://tools-manufactures.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures-server-production.up.railway.app/blogs?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -37,7 +37,7 @@ const ManageBlog = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://tools-manufactures.herokuapp.com/blogs?uid=${auth?.currentUser?.uid}&&deletedId=${id}`,
+          `https://tools-manufactures-server-production.up.railway.app/blogs?uid=${auth?.currentUser?.uid}&&deletedId=${id}`,
           {
             method: "DELETE",
             headers: {

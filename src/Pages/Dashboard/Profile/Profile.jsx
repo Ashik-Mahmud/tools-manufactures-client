@@ -18,7 +18,7 @@ const Profile = () => {
     const facebook = event.target.facebook.value;
     const data = { education, number, address, linkedin, facebook };
     await fetch(
-      `https://tools-manufactures.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures-server-production.up.railway.app/users?uid=${auth?.currentUser?.uid}`,
       {
         method: "PATCH",
         headers: {
@@ -45,7 +45,7 @@ const Profile = () => {
     refetch,
   } = useQuery(["profileData", auth?.currentUser?.uid], () =>
     fetch(
-      `https://tools-manufactures.herokuapp.com/users?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures-server-production.up.railway.app/users?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

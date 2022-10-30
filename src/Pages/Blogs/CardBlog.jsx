@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 const CardBlog = ({ category, title, description, _id, views, comment }) => {
   /* Handle Views */
   const handleViews = async (id) => {
-    await fetch(`https://tools-manufactures.herokuapp.com/blogs/views`, {
-      method: "PATCH",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ id }),
-    }).then((res) => res.json());
+    await fetch(
+      `https://tools-manufactures-server-production.up.railway.app/blogs/views`,
+      {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id }),
+      }
+    ).then((res) => res.json());
   };
 
   return (

@@ -23,7 +23,7 @@ const AddReview = () => {
     };
     if (rating && reviewText) {
       await fetch(
-        `https://tools-manufactures.herokuapp.com/reviews?uid=${auth?.currentUser?.uid}`,
+        `https://tools-manufactures-server-production.up.railway.app/reviews?uid=${auth?.currentUser?.uid}`,
         {
           method: "POST",
           headers: {

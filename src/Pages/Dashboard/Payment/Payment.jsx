@@ -17,7 +17,7 @@ const Payment = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useQuery("Orders", () =>
     fetch(
-      `https://tools-manufactures.herokuapp.com/orders?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures-server-production.up.railway.app/orders?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
