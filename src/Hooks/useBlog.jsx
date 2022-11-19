@@ -4,9 +4,7 @@ const useBlog = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch(
-      `https://tools-manufactures-server-production.up.railway.app/blogs/all`
-    )
+    fetch(`https://tools-manufactures.onrender.com/blogs/all`)
       .then((res) => res.json())
       .then((result) => {
         setLoading(true);

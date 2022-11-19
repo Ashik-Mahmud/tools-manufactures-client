@@ -28,7 +28,7 @@ const BlogDetails = () => {
   /* Get Real Time Comment for Each POST */
   const { data, isLoading, refetch } = useQuery(["comments", blogId], () =>
     fetch(
-      `https://tools-manufactures-server-production.up.railway.app/blogs/comments?postId=${blogId}`
+      `https://tools-manufactures.onrender.com/blogs/comments?postId=${blogId}`
     ).then((res) => res.json())
   );
 
@@ -51,7 +51,7 @@ const BlogDetails = () => {
         new Date().toDateString() + " at " + new Date().toLocaleTimeString(),
     };
     await fetch(
-      `https://tools-manufactures-server-production.up.railway.app/blogs/comment?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.onrender.com/blogs/comment?uid=${auth?.currentUser?.uid}`,
       {
         method: "POST",
         headers: {
@@ -74,7 +74,7 @@ const BlogDetails = () => {
 
   const commentCount = async () => {
     await fetch(
-      `https://tools-manufactures-server-production.up.railway.app/blogs/commentCount?postId=${blogId}`,
+      `https://tools-manufactures.onrender.com/blogs/commentCount?postId=${blogId}`,
       {
         method: "PATCH",
         headers: {

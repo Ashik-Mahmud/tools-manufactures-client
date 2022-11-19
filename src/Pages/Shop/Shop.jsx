@@ -17,7 +17,7 @@ const Shop = () => {
     const searchText = event.target.search.value;
     if (!searchText) return toast.error(`Search field is required.`);
     await fetch(
-      `https://tools-manufactures-server-production.up.railway.app/products/search?q=${searchText}`
+      `https://tools-manufactures.onrender.com/products/search?q=${searchText}`
     )
       .then((res) => res.json())
       .then((result) => {

@@ -11,7 +11,7 @@ const ManageProduct = () => {
   const [pageCount, setPageCount] = useState(0);
   const { data, isLoading, refetch } = useQuery(["products", pageCount], () =>
     fetch(
-      `https://tools-manufactures-server-production.up.railway.app/products?uid=${auth?.currentUser?.uid}&&page=${pageCount}&&limit=6`,
+      `https://tools-manufactures.onrender.com/products?uid=${auth?.currentUser?.uid}&&page=${pageCount}&&limit=6`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -30,7 +30,7 @@ const ManageProduct = () => {
   const handleUpdateStock = async (event) => {
     event.preventDefault();
     await fetch(
-      `https://tools-manufactures-server-production.up.railway.app/products/update-stock?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.onrender.com/products/update-stock?uid=${auth?.currentUser?.uid}`,
       {
         method: "PATCH",
         headers: {

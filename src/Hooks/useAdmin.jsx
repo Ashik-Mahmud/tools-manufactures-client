@@ -7,7 +7,7 @@ const useAdmin = () => {
   useEffect(() => {
     (async () => {
       await fetch(
-        `https://tools-manufactures-server-production.up.railway.app/admin?uid=${auth?.currentUser?.uid}`,
+        `https://tools-manufactures.onrender.com/admin?uid=${auth?.currentUser?.uid}`,
         {
           headers: {
             authorization: `Bearer ${localStorage.getItem("accessToken")}`,

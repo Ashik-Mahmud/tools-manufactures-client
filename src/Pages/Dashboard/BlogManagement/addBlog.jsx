@@ -19,17 +19,14 @@ const addBlog = () => {
       },
     };
 
-    await fetch(
-      `https://tools-manufactures-server-production.up.railway.app/blogs`,
-      {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(blogData),
-      }
-    )
+    await fetch(`https://tools-manufactures.onrender.com/blogs`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(blogData),
+    })
       .then((res) => res.json())
       .then((result) => {
         if (result.success) {

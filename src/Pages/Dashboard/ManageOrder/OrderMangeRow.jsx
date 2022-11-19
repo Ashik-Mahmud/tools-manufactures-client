@@ -29,7 +29,7 @@ const OrderMangeRow = ({
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://tools-manufactures-server-production.up.railway.app/orders/shipped?uid=${auth?.currentUser?.uid}&&shippedId=${id}`,
+          `https://tools-manufactures.onrender.com/orders/shipped?uid=${auth?.currentUser?.uid}&&shippedId=${id}`,
           {
             method: "PATCH",
             headers: {
@@ -64,7 +64,7 @@ const OrderMangeRow = ({
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://tools-manufactures-server-production.up.railway.app/orders?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
+          `https://tools-manufactures.onrender.com/orders?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
           {
             method: "DELETE",
             headers: {

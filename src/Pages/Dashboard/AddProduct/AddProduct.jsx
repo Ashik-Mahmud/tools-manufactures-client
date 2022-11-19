@@ -61,7 +61,7 @@ const AddProduct = () => {
     };
 
     await fetch(
-      `https://tools-manufactures-server-production.up.railway.app/products?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.onrender.com/products?uid=${auth?.currentUser?.uid}`,
       {
         method: "POST",
         headers: {

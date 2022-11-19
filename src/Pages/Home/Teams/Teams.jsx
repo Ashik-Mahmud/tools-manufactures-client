@@ -7,7 +7,7 @@ const Teams = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch(`https://tools-manufactures-server-production.up.railway.app/teams`)
+    fetch(`https://tools-manufactures.onrender.com/teams`)
       .then((res) => res.json())
       .then((data) => {
         setTeams(data.result);

@@ -8,7 +8,7 @@ const MakeAdmin = () => {
   useTitle("Make Admin");
   const { data, isLoading, refetch } = useQuery("Users", () =>
     fetch(
-      `https://tools-manufactures-server-production.up.railway.app/users/all?uid=${auth?.currentUser.uid}`,
+      `https://tools-manufactures.onrender.com/users/all?uid=${auth?.currentUser.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

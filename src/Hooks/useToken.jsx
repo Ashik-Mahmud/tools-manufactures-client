@@ -5,14 +5,11 @@ const useToken = (user) => {
   useEffect(() => {
     if (user) {
       (async () => {
-        await fetch(
-          `https://tools-manufactures-server-production.up.railway.app/login`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ uid: user?.uid, email: user?.email }),
-          }
-        )
+        await fetch(`https://tools-manufactures.onrender.com/login`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ uid: user?.uid, email: user?.email }),
+        })
           .then((res) => res.json())
           .then(({ token }) => {
             localStorage.setItem("accessToken", token);

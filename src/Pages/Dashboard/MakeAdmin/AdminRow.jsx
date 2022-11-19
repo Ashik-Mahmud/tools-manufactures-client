@@ -7,7 +7,7 @@ const AdminRow = ({ uid, serialize, email, role, refetch, _id }) => {
   /* Handle Make Admin  */
   const handleMakeAdmin = async (id) => {
     await fetch(
-      `https://tools-manufactures-server-production.up.railway.app/users/admin?uid=${id}&&currentUserId=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.onrender.com/users/admin?uid=${id}&&currentUserId=${auth?.currentUser?.uid}`,
       {
         method: "PATCH",
         headers: {
@@ -39,7 +39,7 @@ const AdminRow = ({ uid, serialize, email, role, refetch, _id }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://tools-manufactures-server-production.up.railway.app/users?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
+          `https://tools-manufactures.onrender.com/users?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
           {
             method: "DELETE",
             headers: {

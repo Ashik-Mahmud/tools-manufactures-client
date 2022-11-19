@@ -28,7 +28,7 @@ const ProductRow = ({
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(
-          `https://tools-manufactures-server-production.up.railway.app/products?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
+          `https://tools-manufactures.onrender.com/products?uid=${auth?.currentUser?.uid}&&deleteId=${id}`,
           {
             method: "DELETE",
             headers: {

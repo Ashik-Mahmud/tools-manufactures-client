@@ -22,7 +22,7 @@ const EditBlog = () => {
       createAt: new Date().toDateString(),
     };
     await fetch(
-      `https://tools-manufactures-server-production.up.railway.app/blogs?uid=${auth?.currentUser?.uid}&&editId=${editId}`,
+      `https://tools-manufactures.onrender.com/blogs?uid=${auth?.currentUser?.uid}&&editId=${editId}`,
       {
         method: "PUT",
         headers: {

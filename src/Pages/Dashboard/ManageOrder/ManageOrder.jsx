@@ -8,7 +8,7 @@ const ManageOrder = () => {
   useTitle("Manage Order");
   const { data, isLoading, refetch } = useQuery("orders", () =>
     fetch(
-      `https://tools-manufactures-server-production.up.railway.app/orders/all?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.onrender.com/orders/all?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

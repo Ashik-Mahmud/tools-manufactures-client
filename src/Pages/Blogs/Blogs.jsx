@@ -18,7 +18,7 @@ const Blogs = () => {
     const searchText = event.target.searchText.value;
     if (!searchText) return toast.error(`Search field is required`);
     await fetch(
-      `https://tools-manufactures-server-production.up.railway.app/blogs/search?q=${searchText}`
+      `https://tools-manufactures.onrender.com/blogs/search?q=${searchText}`
     )
       .then((res) => res.json())
       .then((data) => {

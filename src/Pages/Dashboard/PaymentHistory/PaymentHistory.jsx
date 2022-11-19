@@ -9,7 +9,7 @@ const PaymentHistory = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     fetch(
-      `https://tools-manufactures-server-production.up.railway.app/payment/history?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.onrender.com/payment/history?uid=${auth?.currentUser?.uid}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -14,7 +14,7 @@ const Purchase = () => {
 
   const { data, isLoading } = useQuery("products", () =>
     fetch(
-      `https://tools-manufactures-server-production.up.railway.app/products/one?uid=${auth?.currentUser?.uid}&&purchaseId=${purchaseId}`,
+      `https://tools-manufactures.onrender.com/products/one?uid=${auth?.currentUser?.uid}&&purchaseId=${purchaseId}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -78,7 +78,7 @@ const Purchase = () => {
   /* Send Order data into Server */
   const sendOrderData = async (data) => {
     await fetch(
-      `https://tools-manufactures-server-production.up.railway.app/orders?uid=${auth?.currentUser?.uid}`,
+      `https://tools-manufactures.onrender.com/orders?uid=${auth?.currentUser?.uid}`,
       {
         method: "POST",
         headers: {

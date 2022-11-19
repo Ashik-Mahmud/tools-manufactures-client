@@ -10,7 +10,7 @@ const Comment = ({ comment, author, createdAt, _id, refetch }) => {
     );
     if (isConfirmed) {
       await fetch(
-        `https://tools-manufactures-server-production.up.railway.app/blogs/comment?uid=${auth?.currentUser?.uid}&&commentId=${id}`,
+        `https://tools-manufactures.onrender.com/blogs/comment?uid=${auth?.currentUser?.uid}&&commentId=${id}`,
         {
           method: "DELETE",
           headers: {
